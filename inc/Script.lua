@@ -5013,8 +5013,6 @@ GetUserID(FwdUser,function(arg,data)
 if data.username_ then USERNAME = '@'..data.username_ else USERNAME = FlterName(data,20) end
 if FwdUser == 1836706131 then 
 return sendMsg(arg.ChatID,arg.id_,"- لا يمكنك حظر مطور السورس ؛") 
-if FwdUser == 814848087 then 
-return sendMsg(arg.ChatID,arg.id_,"- لا يمكنك حظر مطور السورس ؛") 
 end
 redis:hset(boss..'username:'..arg.FwdUser,'username',USERNAME)
 if redis:sismember(boss..'bannedpv',FwdUser) then 
