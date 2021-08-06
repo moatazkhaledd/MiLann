@@ -4942,8 +4942,6 @@ local Resolv = ResolveUserName(data)
 NameUser = Hyper_Link_Name(data)
 if UserID == 1836706131 then 
 return sendMsg(ChatID,MsgID,"- لا يمكنك حظر مطور السورس ؛") 
-elseif UserID == 814848087 then 
-return sendMsg(ChatID,MsgID,"- لا يمكنك حظر مطور السورس ؛") 
 if redis:sismember(boss..'bannedpv',UserID) then 
 return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم بالتاكيد حظره  من التواصل ") 
 end
