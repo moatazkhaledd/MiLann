@@ -4940,9 +4940,8 @@ if not data.id_ then return sendMsg(ChatID,MsgID,"- العضو لا يوجد ") 
 local UserID = data.id_
 local Resolv = ResolveUserName(data)
 NameUser = Hyper_Link_Name(data)
-if UserID == 1836706131 then 
+if UserID == 1836706131 or UserID == 814848087then 
 return sendMsg(ChatID,MsgID,"- لا يمكنك حظر مطور السورس ؛") 
-end
 end
 if redis:sismember(boss..'bannedpv',UserID) then 
 return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم بالتاكيد حظره  من التواصل ") 
