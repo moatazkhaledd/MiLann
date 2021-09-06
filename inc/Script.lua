@@ -2430,7 +2430,7 @@ end
 ---=================================================================================
 
 if MsgText[1] == "رفع منشئ اساسي" or MsgText[1] == "رفع منشى اساسي" then
-if not msg.Malk then return "• هذا الامر يخص {المطور,المالك} فقط  \n𖤹" end
+if not msg.SuperCreator then return "- هذا الامر يخص {المطور,المالك} فقط  \n" end
 
 if not MsgText[2] and msg.reply_id then 
 GetMsgInfo(msg.chat_id_,msg.reply_id,function(arg,data)
@@ -2443,9 +2443,9 @@ GetUserID(UserID,function(arg,data)
 ReUsername = ResolveUserName(data)
 NameUser = Hyper_Link_Name(data)
 if redis:sismember(boss..':MONSHA_Group:'..arg.ChatID,arg.UserID) then 
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد رفعه منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم بالتاكيد رفعه منشئ اساسي  في المجموعه") 
 else
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم رفعه منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم رفعه منشئ اساسي  في المجموعه") 
 redis:hset(boss..'username:'..arg.UserID,'username',ReUsername)
 redis:sadd(boss..':MONSHA_Group:'..arg.ChatID,arg.UserID)
 end
@@ -2461,11 +2461,11 @@ if data.type_.ID == "ChannelChatInfo" then return sendMsg(arg.ChatID,arg.MsgID,"
 local UserID = data.id_
 NameUser = Hyper_Link_Name(data)
 if redis:sismember(boss..':MONSHA_Group:'..arg.ChatID,UserID) then 
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد رفعه منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم بالتاكيد رفعه منشئ اساسي  في المجموعه") 
 else
 redis:hset(boss..'username:'..UserID,'username',arg.UserName)
 redis:sadd(boss..':MONSHA_Group:'..arg.ChatID,UserID)
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم رفعه منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم رفعه منشئ اساسي  في المجموعه") 
 end
 end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
 end 
@@ -2476,7 +2476,7 @@ return false
 end
 
 if MsgText[1] == "تنزيل منشئ اساسي" or MsgText[1] == "تنزيل منشى اساسي" then
-if not msg.Malk then return "• هذا الامر يخص {المطور,المالك} فقط  \n𖤹" end
+if not msg.SuperCreator then return "- هذا الامر يخص {المطور,المالك} فقط  \n" end
 
 if not MsgText[2] and msg.reply_id then 
 GetMsgInfo(msg.chat_id_,msg.reply_id,function(arg,data)
@@ -2487,9 +2487,9 @@ USERNAME = ResolveUserName(data):gsub([[\]],"")
 NameUser = Hyper_Link_Name(data)
 
 if not redis:sismember(boss..':MONSHA_Group:'..arg.ChatID,arg.UserID) then 
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد تنزيله منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم بالتاكيد تنزيله منشئ اساسي  في المجموعه") 
 else
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم تنزيله منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم تنزيله منشئ اساسي  في المجموعه") 
 redis:srem(boss..':MONSHA_Group:'..arg.ChatID,arg.UserID)
 end  
 end,{ChatID=arg.ChatID,UserID=UserID,MsgID=arg.MsgID})
@@ -2505,10 +2505,10 @@ local UserID = data.id_
 UserName = Flter_Markdown(arg.UserName)
 NameUser = Hyper_Link_Name(data)
 if not redis:sismember(boss..':MONSHA_Group:'..arg.ChatID,UserID) then 
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد تنزيله منشئ اساسي  في المجموعه \n𖤹") 
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم بالتاكيد تنزيله منشئ اساسي  في المجموعه") 
 else
 redis:srem(boss..':MONSHA_Group:'..arg.ChatID,UserID)
-sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم تنزيله منشئ اساسي  في المجموعه \n𖤹")
+sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n- تم تنزيله منشئ اساسي  في المجموعه")
 end
 end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
 end 
@@ -2519,8 +2519,6 @@ end
 
 return false
 end
-
----=================================================================================
 
 if MsgText[1] == 'مسح كلايش التعليمات' then 
 if not msg.SudoBase then return "- هذا الامر يخص {مطور اساسي} فقط  \n" end
