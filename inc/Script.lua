@@ -685,7 +685,7 @@ return sendMsg(arg.ChatID,arg.MsgID,"• عذرا هذا معرف قناة ول�
 end
 UserName = arg.UserName
 if redis:sismember(boss..':MONSHA_BOT:'..arg.ChatID,UserID) then 
-return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد رفعه منشئ  في المجموعه\𖤹") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد رفعه منشئ  في المجموعه \𖤹") 
 else
 redis:hset(boss..'username:'..UserID,'username',UserName)
 redis:sadd(boss..':MONSHA_BOT:'..arg.ChatID,UserID)
