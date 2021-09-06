@@ -685,7 +685,7 @@ return sendMsg(arg.ChatID,arg.MsgID,"• عذرا هذا معرف قناة ول�
 end
 UserName = arg.UserName
 if redis:sismember(boss..':MONSHA_BOT:'..arg.ChatID,UserID) then 
-return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n• تم بالتاكيد رفعه منشئ  في المجموعه \𖤹") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  ⋙「 "..NameUser.." 」 \n•  تم بالتاكيد رفعه منشئ  في المجموعه") 
 else
 redis:hset(boss..'username:'..UserID,'username',UserName)
 redis:sadd(boss..':MONSHA_BOT:'..arg.ChatID,UserID)
@@ -4108,7 +4108,7 @@ local inline = {
 {{text = '• 𝒔𝒐𝒖𝒓𝒄𝒆 𝒎𝒊𝒍𝒂𝒏 彡',url="https://t.me/SORPET"}},
 {{text = '• 𝒅𝒆𝒗 父',url="https://t.me/UUIIID"}},
 {{text = '• 𝒅𝒆𝒗 父',url="https://t.me/lml_lnl"}},
-{{text = '• 𝒕𝒘𝒂??𝒐𝒍 𖤹 ',url="https://t.me/XB8BBOT"}},
+{{text = '• 𝒕𝒘𝒂????𝒍 𖤹 ',url="https://t.me/XB8BBOT"}},
 }   
 return send_inline(msg.chat_id_,text,inline,msg.id_)
 end
