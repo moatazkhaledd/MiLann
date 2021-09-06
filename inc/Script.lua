@@ -7057,19 +7057,12 @@ elseif not msg.SudoUser and Text==" صراحه" or Text == "صراحه" then
 sendMsg(msg.chat_id_,msg.id_,srah[math.random(#srah)])
 
 elseif Text== "معتز" or Text== "زوز" or Text== "وزه" then return sendMsg(msg.chat_id_,msg.id_,"[مطور السورس𖤹](T.ME/XB0BB)")
-elseif text == 'رابط الحذف' or text == 'رابط حذف' then
-t =[[
-رابط الحذف في جميع مواقع التواصل ●
-فكر قبل لا تتسرع وتروح
-ٴ●○━━━∴━━━●○ٴ
- ● رابط حذف  [Telegram](https://my.telegram.org/auth?to=delete) ܁
- ● رابط حذف [instagram](https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/) ܁
- ● رابط حذف [Facebook](https://www.facebook.com/help/deleteaccount) ܁
- ● رابط حذف [Snspchat](https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount) ܁
-]]
-send(msg.chat_id_, msg.id_,t) 
-return false
-end
+elseif Text=="اريد رابط الحذف" or Text=="اريد رابط حذف" or Text=="رابط حذف" or Text=="رابط الحذف" then
+return sendMsg(msg.chat_id_,msg.id_,[[
+ رابط حذف حـساب التيليجرام ↯
+ بالتـوفيـق ...
+ ¦ـ  https://telegram.org/deactivate
+]] )
 elseif Text== "انجب" or Text== "نجب" or Text=="جب" then
 if msg.SudoUser then  
 return sendMsg(msg.chat_id_,msg.id_,"تـم 🙂😂.")
