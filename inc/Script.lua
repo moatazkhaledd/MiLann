@@ -1790,41 +1790,34 @@ return TagAll(msg)
 end
 
 if MsgText[1] == "تاك للكل" then
-if not msg.Admin then return "- هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
-if not redis:get(boss.."lock_takkl"..msg.chat_id_) then  return "-  الامر معطل من قبل الادراة" end 
-if redis:get(boss.."chat:tagall"..msg.chat_id_) then  return "-  يمكنك عمل تاك للكل كل *5 دقائق* فقط" end 
-redis:setex(boss..'chat:tagall'..msg.chat_id_,300,true)
-if MsgText[2] and MsgText[2]:match('^ل %d+$') then
-taglimit = MsgText[2]:match('^ل %d+$'):gsub('ل ','')
-
-else
-taglimit = 200
-end
-tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub('-100',''), offset_ = 0,limit_ = taglimit
-},function(ta,moody)
+if not msg.Admin then return "هذا الامر يخص {الادمن,المدير,المنشئ} فقط \n" end
+tdcli_function({ID="GetChannelFull",channel_id_ = msg.chat_id_:gsub('-100','')},function(argg,dataa) 
+tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub('-100',''), offset_ = 0,limit_ = dataa.member_count_},function(ta,datate)
 x = 0
-list = moody.members_
+tags = 0
+local list = datate.members_ 
 for k, v in pairs(list) do
-GetUserID(v.user_id_,function(arg,data)
-x = x + 1
-if x == 1 then
-t = "-  قائمة الاعضاء \n\n"
+tdcli_function({ID="GetUser",user_id_ = v.user_id_},function(arg,data)
+if x == 5 or x == tags or k == 0 then
+tags = x + 5
+t = "#all"
 end
-if data.username_ then
-t = t..""..x.."-l {[@"..data.username_.."]} \n"
-else
-tagname = FlterName(data.first_name_..' '..(data.last_name_ or ""),20)
+x = x + 1
+tagname = data.first_name_
 tagname = tagname:gsub("]","")
 tagname = tagname:gsub("[[]","")
-t = t..""..x.."-l {["..tagname.."](tg://user?id="..v.user_id_..")} \n"
-end
-if k == 0 then
-send_msg(msg.chat_id_,t,msg.id_)
-end
-end)
+t = t..", ["..tagname.."](tg://user?id="..v.user_id_..")"
+if x == 5 or x == tags or k == 0 then
+local Text = t:gsub(',','\n')
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..Token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown")
 end
 end,nil)
 end
+end,nil)
+end,nil)
+end
+
 if MsgText[1] == "منع" then 
 if not msg.Admin then return "- هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
 if MsgText[2] then
