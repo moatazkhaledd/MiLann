@@ -4107,7 +4107,7 @@ local inline = {
 {{text = '• 𝒔𝒐𝒖𝒓𝒄𝒆 𝒎𝒊𝒍𝒂𝒏 彡',url="https://t.me/SORPET"}},
 {{text = '• 𝒅𝒆𝒗 父',url="https://t.me/UUIIID"}},
 {{text = '• 𝒅𝒆𝒗 父',url="https://t.me/lml_lnl"}},
-{{text = '• 𝒕𝒘𝒂????𝒍 𖤹 ',url="https://t.me/XB8BBOT"}},
+{{text = '• 𝒕𝒘𝒂𝒔𝒐𝒍 𖤹 ',url="https://t.me/XB8BBOT"}},
 }   
 return send_inline(msg.chat_id_,text,inline,msg.id_)
 end
