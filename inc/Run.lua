@@ -304,10 +304,7 @@ if msg.sender_user_id_ == 1836706131 then
 msg.TheRankCmd = 'مطور السورس'
 msg.TheRank = 'مطور السورس'
 msg.Rank = 1
-elseif msg.sender_user_id_ == 814848087 then 
-msg.TheRankCmd = 'مطور السورس'
-msg.TheRank = 'مطور السورس'
-msg.Rank = 1
+
 elseif msg.sender_user_id_ == SUDO_ID then 
 msg.TheRankCmd = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'المطور الاساسي' 
 msg.TheRank = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'مطور اساسي ' 
@@ -507,7 +504,7 @@ amrnew = Amor ; amrold = ik
 end end end
 Text = Text:gsub(amrnew,amrold)
 AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترگ بآلقنآ‌‏هہ",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
 return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
 GetMsg = ScriptFile.iBoss(msg,{Text:match(Text2)})
 if GetMsg then
@@ -524,7 +521,7 @@ Text = Text:gsub("ک","ك")
 Text = Text:gsub("ه‍","ه")
 if Text:match(Boss) then -- Check Commands To admin
 AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترگ بآلقنآ‌‏هہ",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
 return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
 GetMsg = ScriptFile.iBoss(msg,{Text:match(Boss)})
 if GetMsg then
