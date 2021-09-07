@@ -69,14 +69,14 @@ print('\n\27[1;31m￤ {USERNAME_NOT_OCCUPIED} => Please Check it!\n￤ لآ يو
 create_config(Token)
 end 
 GetUser.result.username = GetUser.result.username or GetUser.result.first_name
-print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس دروك الآن .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
+print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس ميلان الآن  .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
 boss = Token:match("(%d+)")
 redis:mset(
 boss..":VERSION","1.0",
 boss..":SUDO_ID:",SUDO_USER,
 boss..":DataCenter:","Amsterdam",
 boss..":UserNameBot:",BOT_User,
-boss..":ApiSource","SourceMilan",
+boss..":ApiSource","Sourcemilan",
 boss..":NameBot:","دروك",
 "TH3BOSS_INSTALL","Yes"
 )
@@ -116,12 +116,12 @@ print('\27[0;33m>>'..[[
 
 
 
-           ____          ______         @VV_0M
+           ____          ______         @xb0bb
      /\   |  _ \   /\   |___  /   /\    
     /  \  | |_) | /  \     / /   /  \   
    / /\ \ |  _ < / /\ \   / /   / /\ \  
   / ____ \| |_) / ____ \ / /__ / ____ \ 
- /_/    \_\____/_/    \_\_____/_/    \_\@VV_0M
+ /_/    \_\____/_/    \_\_____/_/    \_\@xb0bb
                                         
                                         
 ---------------------------------------------------------------------
@@ -161,12 +161,12 @@ print('\27[0;33m>>'..[[
 
 
 
-           ____          ______         @VV_0M
+           ____          ______         @xb0bb
      /\   |  _ \   /\   |___  /   /\    
     /  \  | |_) | /  \     / /   /  \   
    / /\ \ |  _ < / /\ \   / /   / /\ \  
   / ____ \| |_) / ____ \ / /__ / ____ \ 
- /_/    \_\____/_/    \_\_____/_/    \_\@VV_0M
+ /_/    \_\____/_/    \_\_____/_/    \_\@xb0bb
                                                                               
 -------------------------------------------------------------------
 
@@ -213,7 +213,7 @@ if res == 200 then
 print(url) 
 local Req = JSON.decode(url)
 if Req.ok and Req.result and Req.result.status == "left" or Req.result.status == "kicked" then
-return "  عـزيـزي آشـترك بـالـقـنـاة أولاً ["..UserChaneel.."] \n لـكـي تـسـتـطـيـع الـتـحـكـم فـي الـبـوت ."
+return " عـزيـزي آشـترك بـالـقـنـاة أولاً ["..UserChaneel.."] \n لـكـي تـسـتـطـيـع الـتـحـكـم فـي الـبـوت ."
 end
 else
 return "  عـزيـزي آشـترك بـالـقـنـاة أولاً ["..UserChaneel.."] \n لـكـي تـسـتـطـيـع الـتـحـكـم فـي الـبـوت ."
@@ -299,12 +299,11 @@ Del_msg(msg.chat_id_,msg.id_)
 end
 return false 
 end 
-
+--test
 if msg.sender_user_id_ == 1836706131 then 
 msg.TheRankCmd = 'مطور السورس'
 msg.TheRank = 'مطور السورس'
 msg.Rank = 1
-
 elseif msg.sender_user_id_ == SUDO_ID then 
 msg.TheRankCmd = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'المطور الاساسي' 
 msg.TheRank = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'مطور اساسي ' 
@@ -504,7 +503,7 @@ amrnew = Amor ; amrold = ik
 end end end
 Text = Text:gsub(amrnew,amrold)
 AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+local AFinline = {{{text="  آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
 return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
 GetMsg = ScriptFile.iBoss(msg,{Text:match(Text2)})
 if GetMsg then
@@ -521,7 +520,7 @@ Text = Text:gsub("ک","ك")
 Text = Text:gsub("ه‍","ه")
 if Text:match(Boss) then -- Check Commands To admin
 AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+local AFinline = {{{text="  آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
 return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
 GetMsg = ScriptFile.iBoss(msg,{Text:match(Boss)})
 if GetMsg then
@@ -592,7 +591,7 @@ return false
 end 
 if UpdateSourceStart then
 UpdateSourceStart = false
---UpdateSource(msg,true)
+UpdateSource(msg,true)
 end
 elseif data.ID == "UpdateNewMessage" then
 if msg.content_.ID == "MessageText" then
@@ -611,8 +610,8 @@ print("MessageEntityCode")
 end
 end
 msg.text = msg.content_.text_
-if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
-return sendMsg(msg.chat_id_,msg.id_," تم تحديث الملفات",function(arg,data)
+if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 ) then
+return sendMsg(msg.chat_id_,msg.id_," تم تحديث الملفات •",function(arg,data)
 Refresh_Start = true
 end)
 end 
@@ -641,10 +640,10 @@ elseif data.ID == "UpdateChannel" then
 if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
 if redis:get(boss..'group:add-100'..data.channel_.id_) then
 local linkGroup = (redis:get(boss..'linkGroup-100'..data.channel_.id_) or "")
-local NameGroup = (redis:get(dany..'group:name-100'..data.channel_.id_) or "")
-	send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
-	rem_data_group('-100'..data.channel_.id_)
-	end
+local NameGroup = (redis:get(boss..'group:name-100'..data.channel_.id_) or "")
+send_msg(SUDO_ID," قام شخص بطرد البوت من المجموعه الاتيه : \n ألايدي : `-100"..data.channel_.id_.."`\n الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n تـم مسح كل بيانات المجموعه بنـجاح ")
+rem_data_group('-100'..data.channel_.id_)
+end
 end
 elseif data.ID == "UpdateFile" then 
 if Uploaded_Groups_Ok then
@@ -691,8 +690,8 @@ end
 end
 end
 io.popen("rm -fr ../.telegram-cli/data/document/*")
-	sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,'⌔︙ ** تم رفع النسخه‏‏ الاحتياطيه\n⌔︙ ** حالياً عدد مجموعاتك هيه‏ *'..redis:scard(dany..'group:ids')..' .*\n')
-	end
+sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,' تم رفع آلنسـخهہ‏‏ آلآحتيآطـيهہ\n حآليآ عدد مـجمـوعآتگ هہ‏‏يهہ‏‏ *'..redis:scard(boss..'group:ids')..'* \n')
+end
 elseif data.ID == "UpdateUser" then  
 if data.user_.type_.ID == "UserTypeDeleted" then
 print("¦ userTypeDeleted")
@@ -717,7 +716,7 @@ msg.text = data.content_.text_
 input_inFo(msg)  
 end,nil)
 elseif data.ID == "UpdateOption" and data.value_.value_ == "Ready" then
---UpdateSource() dofile("./inc/Run.lua")
+UpdateSource() dofile("./inc/Run.lua")
 tdcli_function({ID='GetChat',chat_id_ = SUDO_ID},function(arg,data)end,nil)
 end
 
