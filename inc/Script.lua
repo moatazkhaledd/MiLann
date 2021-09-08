@@ -7381,33 +7381,22 @@ if msg.SudoUser and Text == Bot_Name and not Text2 then
 return sendMsg(msg.chat_id_,msg.id_,su[math.random(#su)])
 elseif not msg.SudoUser and Text== Bot_Name and not Text2 then  
 return sendMsg(msg.chat_id_,msg.id_,ss97[math.random(#ss97)])
-elseif Text:match("^كول (.*)$") then
-if utf8.len(Text:match("^كول (.*)$")) > 50 then 
-return sendMsg(msg.chat_id_,msg.id_,"- ما اكدر اكول اكثر من 50 حرف 🙌🏾")
+elseif Text:match("^قول (.*)$") then
+if utf8.len(Text:match("^قول (.*)$")) > 100 then 
+return sendMsg(msg.chat_id_,msg.id_,"• مقدرش اقول اكتر من 100 حرف 🍧 ")
 end
-local callback_Text = FlterName(Text:match("^كول (.*)$"),50)
-if callback_Text and callback_Text == 'الاسم سبام 📛' then
-return sendMsg(msg.chat_id_,msg.id_,"- للاسف النص هذا مخالف ")
+local callback_Text = FlterName(Text:match("^قول (.*)$"),100)
+if callback_Text and callback_Text == 'الاسم سبام' then
+return sendMsg(msg.chat_id_,msg.id_,"• للاسف النص هذا مخالف ")
 else
 return sendMsg(msg.chat_id_,0,callback_Text) 
 end
-elseif Text:match("^"..Bot_Name.." اتفل (.*)$") then
-if msg.reply_id then
-sendMsg(msg.chat_id_,msg.id_,'تــم حـبـي تففففف😔😂💦')
-sendMsg(msg.chat_id_,msg.reply_id,'خختتففوو 😔😂💦')
-else 
-return sendMsg(msg.chat_id_,msg.id_,"  🕵🏻 وينه بله سويله رد 🙄")
-end
-elseif Text:match("^"..Bot_Name.." رزله(.*)$") and msg.SudoUser then
-if msg.reply_id then
-sendMsg(msg.chat_id_,msg.id_,'تــم حـبـي تففففف😔😂💦')
-return sendMsg(msg.chat_id_,msg.reply_id,'تعال هيوو شو طالعه عينك ولسانك طويل سربوت اشو تعال بله هذا ويهك  كول بلعباس دي لك وتفو بعد لتندك بتاج راسك خوش حبي 😉🤣.') 
-end
+
 elseif Text:match("^بوس (.*)$") then 
 if msg.reply_id then 
 return sendMsg(msg.chat_id_,msg.reply_id,bs[math.random(#bs)])
 else
-return sendMsg(msg.chat_id_,msg.id_,"📌 وينه بله سويله رد 🕵🏻")
+return sendMsg(msg.chat_id_,msg.id_,"ابوس مين بقا اعملو رد 😂🍧")
 end 
 elseif msg.SudoUser and Text=="هلو" then 
 return sendMsg(msg.chat_id_,msg.id_,sh[math.random(#sh)])
@@ -7423,91 +7412,8 @@ elseif not msg.SudoUser and Text== "تحبني" then
 return sendMsg(msg.chat_id_,msg.id_,lovm[math.random(#lovm)])
 elseif Text== "غني" or Text=="غنيلي" then 
 return sendMsg(msg.chat_id_,msg.id_,song[math.random(#song)])
-elseif Text=="اتفل" or Text=="تفل" then
-if msg.Admin then 
-return sendMsg(msg.chat_id_,msg.id_,'خختتففوو 😔😂💦️')
-else 
-return sendMsg(msg.chat_id_,msg.id_,"انـجـب مـاتـفـل عـيـب 🥲.") 
-end
-elseif Text== "تف" then return sendMsg(msg.chat_id_,msg.id_,"اتـفــل اقـوة😔😂.")
-elseif Text== "شلونكم" or Text== "شلونك" or Text== "شونك" or Text== "شونكم" then 
-return sendMsg(msg.chat_id_,msg.id_,"تـمـام قـلـبي 💙+ انـت شـلـونـك شـخـبـارك؟")
-elseif Text== "صاكه"  then return sendMsg(msg.chat_id_,msg.id_,"اوفف دز صـورتـهـا 🥲😂")
-elseif Text== "وينك"  then return sendMsg(msg.chat_id_,msg.id_,"يـمـك حـبــيـي 💙.")
-elseif Text== "منورين"  then return sendMsg(msg.chat_id_,msg.id_,"نـورك حـبــيـي 💙.")
-elseif Text== "هاي"  then return sendMsg(msg.chat_id_,msg.id_,"هـايـات حـبـي 💕.")
-elseif Text== "🙊"  then return sendMsg(msg.chat_id_,msg.id_,"ابــوس الخـجـلان 🥲💙")
-elseif Text== "😢"  then return sendMsg(msg.chat_id_,msg.id_,"لـتـبـجـي حـيـاتـي 💕.")
-elseif Text== "😭"  then return sendMsg(msg.chat_id_,msg.id_,"لـتـبـجـي حـيـاتـي 💕.")
-elseif Text== "منور"  then return sendMsg(msg.chat_id_,msg.id_,"نــورك ♥️.")
-elseif Text== "😒" and not is_sudo then return sendMsg(msg.chat_id_,msg.id_,"شـبـيـك حـبـي 🖤.")
-elseif Text== "مح"  then return sendMsg(msg.chat_id_,msg.id_,"اوفف عـسـل 🍯♥️.")
-elseif Text== "شكرا" or Text== "ثكرا" then return  sendMsg(msg.chat_id_,msg.id_,"الــعـفـو عـمـري 💕.")
-elseif Text== "انته وين"  then return sendMsg(msg.chat_id_,msg.id_,"بالــبــ🏠ــيــت")
-elseif Text== "اكرهك"  then return sendMsg(msg.chat_id_,msg.id_," عـليـك الله حـبـنـي😔😂.")
-elseif Text== "اريد اكبل" then return sendMsg(msg.chat_id_,msg.id_,"بـطـران 🥲😂.")
-elseif Text== "ضوجه"  then return sendMsg(msg.chat_id_,msg.id_,"وفف كـلـش 🙂🖤.")
-elseif Text== "اروح اصلي" then return sendMsg(msg.chat_id_,msg.id_,"اجـي اصـلـي وراك 😔😂.️")
-elseif Text== "صاك"  then return sendMsg(msg.chat_id_,msg.id_,"اخ دزي صـورتـته😔😂.")
-elseif Text== "اجيت" or Text=="اني اجيت" then return  sendMsg(msg.chat_id_,msg.id_,"كل الـهـلا ♥️.")
-elseif Text== "حفلش"  then return sendMsg(msg.chat_id_,msg.id_,"اي خـوش زلـمه ومـن حـقك😔😂.")
-elseif Text== "نايمين" then return sendMsg(msg.chat_id_,msg.id_,"لا بـعـدنه 🖤")
-elseif Text== "اكو احد" then return sendMsg(msg.chat_id_,msg.id_,"اي حـبـي تـفضـل 💙.")
-elseif Text== "شكو" then return sendMsg(msg.chat_id_,msg.id_,"كـلـشي مـاكـو لا صـيـر حـشري😔😂.")
-elseif Text== "انت منو" then return sendMsg(msg.chat_id_,msg.id_,"تـاج راسـك الـفـوك حـبي😔😂.")
-elseif Text== "كلخرا" then return sendMsg(msg.chat_id_,msg.id_,"خرا بحـلكك حـيـوان 🙂😂")
-elseif Text== "حبيبتي" then return sendMsg(msg.chat_id_,msg.id_,"هـا قـلـبي ♥️.")
-elseif Text== "حروح اسبح" then return sendMsg(msg.chat_id_,msg.id_,"اجـي اسـبحـكك😔😂.")
-elseif Text== "😔"  then return sendMsg(msg.chat_id_,msg.id_,"لــضـوج يـحـبي💙.")
-elseif Text== "☹️"  then return sendMsg(msg.chat_id_,msg.id_,"لــضـوج يـحـبي💙")
-elseif Text== "جوعان"  then return sendMsg(msg.chat_id_,msg.id_,"نـاكل سـوه؟")
-elseif Text== "لتحجي"  then return sendMsg(msg.chat_id_,msg.id_,"ونـت شـعلـيك حـاجـي بـحـلــكك 😉🤣")
-elseif Text== "معليك" or Text== "شعليك" then return sendMsg(msg.chat_id_,msg.id_,"بـكـيفـي 🙂😂.")
-elseif Text== "شدسون" or Text== "شداتسوون" or Text== "شدتسون" then return  sendMsg(msg.chat_id_,msg.id_,"نـسـولـف 💙.")
-elseif Text:match(Bot_Name.." شلونك$") then 
-return sendMsg(msg.chat_id_,msg.id_,"تـمـام قـلـبي 💙+ انـت شـلـونـك شـخـبـارك؟")
-elseif Text== "يومه فدوه"  then return sendMsg(msg.chat_id_,msg.id_,"فدؤه الج حياتي 😍😙")
-elseif Text== "افلش"  then return sendMsg(msg.chat_id_,msg.id_,"خـوش زلـمه 😔😂.")
-elseif Text== "احبج"  then return sendMsg(msg.chat_id_,msg.id_,"انـي هـم حـبـيــيي💕.")
-elseif Text== "شكو ماكو"  then return sendMsg(msg.chat_id_,msg.id_,"كـلـشي مـاكــو 🙃♥️️")
-elseif Text== "اغير جو"  then return sendMsg(msg.chat_id_,msg.id_,"تـغـير جـو لـو تـزحـف ؏ بـنـات 😔😂")
-elseif Text== "😋"  then return sendMsg(msg.chat_id_,msg.id_,"وفف لـسانـك 🥲♥️")
-elseif Text== "😡"  then  return sendMsg(msg.chat_id_,msg.id_,"اخ عـصـبـي😔😂."  )
-elseif Text== "مرحبا"  then return sendMsg(msg.chat_id_,msg.id_,"مـراحــب ♥️.")
-elseif Text== "سلام" or Text== "السلام عليكم" or Text== "سلام عليكم" or Text=="سلامن عليكم" or Text=="السلامن عليكم" then 
-return sendMsg(msg.chat_id_,msg.id_,"وعـلــيكم الـسـلام 💙." )
-elseif Text== "واكف"  then return sendMsg(msg.chat_id_,msg.id_,"لا بـعـدنـي شـغـال 🙃🖤." )
-elseif Text== "🚶🏻"  then return sendMsg(msg.chat_id_,msg.id_,"نـمـشي ســوة💕؟")
-elseif Text== "البوت واكف" then return sendMsg(msg.chat_id_,msg.id_,"لا بـعـدنـي شـغـال 🙃🖤.")
-elseif Text== "ضايج"  then return sendMsg(msg.chat_id_,msg.id_,"وفف ابـوس الـضايـج انــي🥲♥️.")
-elseif Text== "ضايجه"  then return sendMsg(msg.chat_id_,msg.id_,"وفف ابـوس الـضايـج انــي🥲♥️.")
-elseif Text== "😳" or Text== "😳😳" or Text== "😳😳😳" then return sendMsg(msg.chat_id_,msg.id_,"شـبـيـك مـصـدوم 😔😂؟")
-elseif Text== "صدك"  then return sendMsg(msg.chat_id_,msg.id_,"قـابـل اجـذب عـلـيـك ؟")
-elseif Text== "شغال"  then return sendMsg(msg.chat_id_,msg.id_,"اي حـبــيبي شـغـال 🙃🖤.")
-elseif Text== "تخليني"  then return sendMsg(msg.chat_id_,msg.id_,"اي اخـليك بـنـص عـيني 🥲💕.")
-elseif Text== "فديتك" or Text== "فديتنك"  then return  sendMsg(msg.chat_id_,msg.id_,"مـح حـياتـي♥️." )
-elseif Text== "بوت"  then return sendMsg(msg.chat_id_,msg.id_,"اسـمـي ["..Bot_Name.."] 💙.")
-elseif Text== "زاحف"  then return sendMsg(msg.chat_id_,msg.id_,"لـيـش اكـو احـله من زحـف😔😂.🌝")
-elseif Text== "حلو"  then return sendMsg(msg.chat_id_,msg.id_,"مـثـلـك 💕.")
-elseif Text== "عاش"  then return sendMsg(msg.chat_id_,msg.id_,"مـح 💙.")
-elseif Text== "مات"  then return sendMsg(msg.chat_id_,msg.id_,"طـبه مـرض 😔😂.")
-elseif Text== "ورده" or Text== "وردة" then return sendMsg(msg.chat_id_,msg.id_,"عـطـرها 💕.")
-elseif Text== "شسمك"  then return sendMsg(msg.chat_id_,msg.id_,"مـكـتـوب فـوك🙂😂.")
-elseif Text== "فديت" or Text=="فطيت" then return sendMsg(msg.chat_id_,msg.id_,"فـدوه لـوجـهك 💙.")
-elseif Text== "واو"  then return sendMsg(msg.chat_id_,msg.id_,"جـمـيــل 🖤.")
-elseif Text== "زاحفه" or Text== "زاحفة" then return  sendMsg(msg.chat_id_,msg.id_,"لـيـش اكـو احـله من زحـف😔😂.")
-elseif Text== "حبيبي" or Text=="حبي" then return  sendMsg(msg.chat_id_,msg.id_,"هـا حـيـاتـي🥲♥️.")
-elseif Text== "حبيبتي" then return sendMsg(msg.chat_id_,msg.id_,"امـوت بـيك💕.")
-elseif Text== "حياتي" then return sendMsg(msg.chat_id_,msg.id_,"هـا قـلـبي ♥️.")
-elseif Text== "عمري" then return sendMsg(msg.chat_id_,msg.id_,"هـا قـلـبي ♥️. ")
-elseif Text== "اسكت" then return sendMsg(msg.chat_id_,msg.id_,"ما اسـكـت 😔😂.")
-elseif Text== "بتحبني" then return sendMsg(msg.chat_id_,msg.id_,"بـمـوت فـيـك 💕.")
-elseif Text== "موجود" then return sendMsg(msg.chat_id_,msg.id_,"اي حـب تــفـضل 💗.")
-elseif Text== "اكلك" then return sendMsg(msg.chat_id_,msg.id_,"كـول قـلـبي ♥️.")
-elseif Text== "فدوه" or Text=="فدوة" or Text=="فطوه" or Text=="فطوة" then  
-return sendMsg(msg.chat_id_,msg.id_,"لـوجـهـك ♥️.")
-elseif Text== "دي"  then return sendMsg(msg.chat_id_,msg.id_,"دعـبـل 🙂😂.")
-elseif Text== "اشكرك" then return sendMsg(msg.chat_id_,msg.id_,"تـدلـل يـحـبي 💕.")
+
+elseif Text== "هاي"  then return sendMsg(msg.chat_id_,msg.id_,"أجمل هايي ، أفخم هاي .")
 
 elseif not msg.SudoUser and Text==" خيروك" then
 sendMsg(msg.chat_id_,msg.id_,ker[math.random(#ker)])
@@ -7522,19 +7428,28 @@ sendMsg(msg.chat_id_,msg.id_,mkl[math.random(#mkl)])
 elseif not msg.SudoUser and Text==" صراحه" or Text == "صراحه" then
 sendMsg(msg.chat_id_,msg.id_,srah[math.random(#srah)])
 
-elseif Text== "معتز" or Text== "زوز" or Text== "وزه" then return sendMsg(msg.chat_id_,msg.id_,"[مطور السورس𖤹](T.ME/XB0BB)")
+elseif Text== "معتز" or Text== "زوز" or Text== "وزه" then return sendMsg(msg.chat_id_,msg.id_,"[مطور السورس 𖤹](T.ME/XB0BB)")
 elseif Text=="اريد رابط الحذف" or Text=="اريد رابط حذف" or Text=="رابط حذف" or Text=="رابط الحذف" then
 return sendMsg(msg.chat_id_,msg.id_,[[
  رابط حذف حـساب التيليجرام ↯
  بالتـوفيـق ...
  ¦ـ  https://telegram.org/deactivate
 ]] )
-elseif Text== "انجب" or Text== "نجب" or Text=="جب" then
-if msg.SudoUser then  
-return sendMsg(msg.chat_id_,msg.id_,"تـم 🙂😂.")
-end 
-end 
 
+--=====================================
+elseif Text== "انا مين" or Text== "مين انا" then
+if msg.SudoUser then  
+return sendMsg(msg.chat_id_,msg.id_,"مطوري العشق")
+elseif msg.Creator then 
+return sendMsg(msg.chat_id_,msg.id_,"المنشئ تاج راسي")
+elseif msg.Director then 
+return sendMsg(msg.chat_id_,msg.id_,"مدير المجموعه الهيبه")
+elseif msg.Admin then 
+return sendMsg(msg.chat_id_,msg.id_,"فقط ادمن")
+else 
+return sendMsg(msg.chat_id_,msg.id_,"تيسك")
+end 
+end 
 
 end
 
@@ -7547,7 +7462,7 @@ if redis:get(boss..'CheckExpire::'..msg.chat_id_) then
 local ExpireDate = redis:ttl(boss..'ExpireDate:'..msg.chat_id_)
 SUDO_USER = redis:hgetall(boss..'username:'..SUDO_ID).username
 if SUDO_USER:match('@[%a%d_]+') then 
-SUDO_USERR = "\n- راسل المطور للتجديد ["..SUDO_USER.."]"
+SUDO_USERR = "\n• راسل المطور للتجديد ["..SUDO_USER.."]"
 else
 SUDO_USERR = ""
 end
@@ -7840,6 +7755,11 @@ Boss = {
 "^(قائمه المنع)$",
 "^(المدراء)$",
 "^(المميزين)$",
+"^(قائمه القرده)$",
+"^(قائمه القلوب)$",
+"^(قائمه الوتك)$",
+"^(قائمه زوجاتي)$",
+"^(قائمه ازواجي)$",
 "^(المكتومين)$",
 "^(ضع الترحيب)$",
 "^(الترحيب)$",
