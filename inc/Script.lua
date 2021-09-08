@@ -7336,6 +7336,15 @@ local mkl = {
 "• {  *العب - لعب - قوي - اسطوري - العب - اكسر - عين - اي - احد - يلعب - معك* }",
 }
 
+local bott = {
+"انت البوت",
+"يا روح قلب البوت💙",
+"تفضل عيـني❤",
+"عيـونـي لك😍",
+"حيـاة البوت🖤",
+"اسمي ["..Bot_Name.."] .",
+}
+
 local su = {
 "نـعـم حـبـيـبي المطـور 💙.",
 "ها حبـيـبي 💙.",
@@ -7412,7 +7421,7 @@ elseif not msg.SudoUser and Text== "تحبني" then
 return sendMsg(msg.chat_id_,msg.id_,lovm[math.random(#lovm)])
 elseif Text== "غني" or Text=="غنيلي" then 
 return sendMsg(msg.chat_id_,msg.id_,song[math.random(#song)])
-
+elseif Text== "بوت"  then return sendMsg(msg.chat_id_,msg.id_,"اسمي ["..Bot_Name.."] .")
 elseif Text== "هاي"  then return sendMsg(msg.chat_id_,msg.id_,"أجمل هايي ، أفخم هاي .")
 
 elseif not msg.SudoUser and Text==" خيروك" then
