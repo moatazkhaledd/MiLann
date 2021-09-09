@@ -593,46 +593,64 @@ Start_Bot()
 return false
 end 
 if UpdateSourceStart then
-UpdateSourceStart = false
---UpdateSource(msg,true)
+	UpdateSourceStart = false
+	EditMsg(data.message_.chat_id_,data.message_.id_,'10% - |█          |')
+	EditMsg(data.message_.chat_id_,data.message_.id_,'20% - |███         |')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Run.lua','./inc/Run.lua')
+	EditMsg(data.message_.chat_id_,data.message_.id_,'40% - |█████       |')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/locks.lua','./inc/locks.lua')
+	EditMsg(data.message_.chat_id_,data.message_.id_,'60% - |███████     |')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Script.lua','./inc/Script.lua')
+	EditMsg(data.message_.chat_id_,data.message_.id_,'80% - |█████████   |')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MilLann/master/inc/functions.lua','./inc/functions.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/games.lua','./plugins/games.lua')
+	EditMsg(data.message_.chat_id_,data.message_.id_,'100% - |█████████████|\n\n• ** السورس الى اصدار \n• ** تم اعاده تشغيل السورس بنجاح')
+	dofile("./inc/Run.lua")
+	print("Update Source And Reload ~ ./inc/Run.lua")
+	end
+	elseif data.ID == "UpdateNewMessage" then
+
+	if msg.content_.ID == "MessageText" and not msg.forward_info_ then
+	if msg.content_.entities_ and msg.content_.entities_[0] and msg.content_.entities_[0].ID then
+	if msg.content_.entities_[0].ID == "MessageEntityTextUrl" then
+	msg.textEntityTypeTextUrl = true
+	print("MessageEntityTextUrl")
+	elseif msg.content_.entities_[0].ID == "MessageEntityBold" then 
+	msg.textEntityTypeBold = true
+	elseif msg.content_.entities_[0].ID == "MessageEntityItalic" then
+	msg.textEntityTypeItalic = true
+	print("MessageEntityItalic")
+	elseif msg.content_.entities_[0].ID == "MessageEntityCode" then
+	msg.textEntityTypeCode = true
+	print("MessageEntityCode")
+	end
+	end
+	msg.text = msg.content_.text_
+	Mohammad = msg.text
+if Mohammad then
+if redis:sismember(dany..'CmDlist:'..msg.chat_id_,Mohammad) then
+mmdi = redis:hget(dany..'CmD:'..msg.chat_id_,Mohammad)
+msg.text = Mohammad:gsub(Mohammad,mmdi)
 end
-elseif data.ID == "UpdateNewMessage" then
-if msg.content_.ID == "MessageText" then
-if msg.content_.entities_ and msg.content_.entities_[0] and msg.content_.entities_[0].ID then
-if msg.content_.entities_[0].ID == "MessageEntityTextUrl" then
-msg.textEntityTypeTextUrl = true
-print("MessageEntityTextUrl")
-elseif msg.content_.entities_[0].ID == "MessageEntityBold" then 
-msg.textEntityTypeBold = true
-elseif msg.content_.entities_[0].ID == "MessageEntityItalic" then
-msg.textEntityTypeItalic = true
-print("MessageEntityItalic")
-elseif msg.content_.entities_[0].ID == "MessageEntityCode" then
-msg.textEntityTypeCode = true
-print("MessageEntityCode")
 end
-end
-msg.text = msg.content_.text_
-if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
-return sendMsg(msg.chat_id_,msg.id_," تم تحديث الملفات",function(arg,data)
-Refresh_Start = true
-end)
-end 
-if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
-UpdateSource(msg)
-sendMsg(msg.chat_id_,msg.id_,' {* تــم تحديث وتثبيت السورس  *} .\n\n { Bot is Update » }',function(arg,data)
-dofile("./inc/Run.lua")
-print("Reload ~ ./inc/Run.lua")
-end) 
-end
-if (msg.text == 'reload' or msg.text == "أعادة التشغيل ") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
-sendMsg(msg.chat_id_,msg.id_,' {* تــم أعـاده تشغيل البوت  *} .\n\n| { Bot is Reloaded » }',function(arg,data)
-dofile("./inc/Run.lua")
-print("Reload ~ ./inc/Run.lua")
-end)
-return false
-end
-end 
+	if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and msg.sender_user_id_ == SUDO_ID then
+	return sendMsg(msg.chat_id_,msg.id_," • تم تحديث الملفات .\n",nil,function(arg,data)
+	Refresh_Start = true
+	end)
+	end 
+	if msg.text== 'Update Source' and msg.sender_user_id_ == SUDO_ID then
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Run.lua','./inc/Run.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Script.lua','./inc/Script.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/functions.lua','./inc/functions.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/locks.lua','./inc/locks.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
+	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/games.lua','./plugins/games.lua')
+	sendMsg(msg.chat_id_,msg.id_,'• {* تــم تحديث وتثبيت السورس  *} .\n\n• { Bot is Update » }',nil,function(arg,data)
+	dofile("./inc/Run.lua")
+	print("Reload ~ ./inc/Run.lua")
+	end) 
+	end
 input_inFo(msg)
 
 elseif data.ID == "UpdateNewChat" then  
