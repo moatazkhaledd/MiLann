@@ -4543,15 +4543,15 @@ end
 
 
 if MsgText[1] == "مغادره" or MsgText[1] == "ادفرني" or MsgText[1] == "احظرني" or MsgText[1] == "اطردني" then
-if msg.Admin then return "- لا استطيع طرد المدراء والادمنيه والمنشئين  \n" end
-if not redis:get(boss.."lock_leftgroup"..msg.chat_id_) then  return "- امر المغادره معطل من قبل اداره المجموعة  \n" end
+if msg.Admin then return "• لا استطيع طرد المدراء والادمنيه والمنشئين  \n" end
+if not redis:get(boss.."lock_leftgroup"..msg.chat_id_) then  return "• امر المغادره معطل من قبل اداره المجموعة  \n" end
 kick_user(msg.sender_user_id_,msg.chat_id_,function(arg,data)
 if data.ID == "Ok" then
 StatusLeft(msg.chat_id_,msg.sender_user_id_)
-send_msg(msg.sender_user_id_,"- اهلا عزيزي , لقد تم طردك من المجموعه بامر منك \n- اذا كان هذا بالخطا او اردت الرجوع للمجموعه \n\n-فهذا رابط المجموعه \n-"..Flter_Markdown(redis:get(boss..'group:name'..msg.chat_id_)).." :\n\n["..redis:get(boss..'linkGroup'..msg.chat_id_).."]\n")
-sendMsg(msg.chat_id_,msg.id_,"- لقد تم طردك بنجاح , ارسلت لك رابط المجموعه في الخاص اذا وصلت لك تستطيع الرجوع متى شئت ")
+send_msg(msg.sender_user_id_,"• اهلا عزيزي , لقد تم طردك من المجموعه بامر منك \n- اذا كان هذا بالخطا او اردت الرجوع للمجموعه \n\n• فهذا رابط المجموعه \n-"..Flter_Markdown(redis:get(boss..'group:name'..msg.chat_id_)).." :\n\n["..redis:get(boss..'linkGroup'..msg.chat_id_).."]\n")
+sendMsg(msg.chat_id_,msg.id_,"• لقد تم طردك بنجاح , ارسلت لك رابط المجموعه في الخاص اذا وصلت لك تستطيع الرجوع متى شئت ")
 else
-sendMsg(msg.chat_id_,msg.id_,"- لا استطيع طردك لانك مشرف في المجموعه  ")
+sendMsg(msg.chat_id_,msg.id_,"• لا استطيع طردك لانك مشرف في المجموعه  ")
 end
 end)
 return false
@@ -4579,8 +4579,8 @@ return send_inline(msg.chat_id_,text,inline,msg.id_)
 end
 
 if MsgText[1] == "متجر الملفات" or MsgText[1]:lower() == "/store"  then
-if not msg.SudoBase then return "✦¹  هذا الامر يخص {المطور الاساسي} فقط  \n" end
-local Get_Files, res = https.request("https://iamabazawhourhhhhhh.github.io/GetFiles.json")
+if not msg.SudoBase then return "- هذا الامر يخص {المطور الاساسي} فقط  \n" end
+local Get_Files, res = https.request("https://th3bs.github.io/GetFiles.json")
 print(Get_Files)
 print(res)
 if res == 200 then
@@ -4593,34 +4593,34 @@ for name,Course in pairs(res.Plugins) do
 local Check_File_is_Found = io.open("plugins/"..name,"r")
 if Check_File_is_Found then
 io.close(Check_File_is_Found)
-CeckFile = "{✔}"
+CeckFile = "{✓}"
 else
 CeckFile = "{✖️}"
 end
 NumFile = NumFile + 1
-TextS = TextS..NumFile.."- `"..name..'` ⇠ '..CeckFile..'\nl*⇠⇠* [{تفاصيل اكثر}]('..Course..")\n------------------------------------\n"
+TextS = TextS..NumFile.."- `"..name..'` » '..CeckFile..'\nl*»»* [{تفاصيل اكثر}]('..Course..")\n------------------------------------\n"
 end
 return TextS..TextE
 else
-return " اوبس , هناك خطأ في مصفوفه الجيسون راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن.!"
+return "- اوبس , هناك خطا في مصفوفه الجيسون راسل مطور السورس ليتمكن من حل المشكله في اسرع وقت ممكن.!"
 end
 else
-return " اوبس , لا يوجد اتصال في الـapi راسل المطور ليتم حل المشكله في اسرع وقت ممكن.!"
+return "- اوبس , لا يوجد اتصال في الـapi راسل المطور ليتم حل المشكله في اسرع وقت ممكن.!"
 end
 return false
 end
 
 if MsgText[1]:lower() == "sp" and MsgText[2] then
-if not msg.SudoBase then return"✦¹  هذا الامر يخص {المطور الاساسي} فقط  \n" end
+if not msg.SudoBase then return"- هذا الامر يخص {المطور الاساسي} فقط  \n" end
 local FileName = MsgText[2]:lower()
 local Check_File_is_Found = io.open("plugins/"..FileName,"r")
 if Check_File_is_Found then
 io.close(Check_File_is_Found)
-TText = " الملف موجود بالفعل \nঌ تم تحديث الملف  \n"
+TText = "- الملف موجود بالفعل \n- تم تحديث الملف ✓"
 else
-TText = "ঌ تم تثبيت وتفعيل الملف بنجاح \n"
+TText = "- تم تثبيت وتفعيل الملف بنجاح ✓"
 end
-local Get_Files, res = https.request("https://raw.githubusercontent.com/iamabazawhourhhhhhh/abaza/main/plugins/"..FileName)
+local Get_Files, res = https.request("https://raw.githubusercontent.com/TH3BS/th3bs.github.io/master/plugins/"..FileName)
 if res == 200 then
 print("DONLOADING_FROM_URL: "..FileName)
 local FileD = io.open("plugins/"..FileName,'w+')
@@ -4630,20 +4630,20 @@ Start_Bot()
 
 return TText
 else
-return " لا يوجد ملف بهذا الاسم في المتجر \n"
+return "- لا يوجد ملف بهذا الاسم في المتجر ✖️"
 end
 end
 
 if MsgText[1]:lower() == "dp" and MsgText[2] then
-if not msg.SudoBase then return"✦¹  هذا الامر يخص {المطور الاساسي} فقط  \n" end
+if not msg.SudoBase then return"- هذا الامر يخص {المطور الاساسي} فقط  \n" end
 local FileName = MsgText[2]:lower()
 local Check_File_is_Found = io.open("plugins/"..FileName,"r")
 if Check_File_is_Found then
 io.close(Check_File_is_Found)
 os.execute("rm -fr plugins/"..FileName)
-TText = " الملف ~⪼ ["..FileName.."] \nঌ تم حذفه بنجاح  \n"
+TText = "- الملف ~⪼ ["..FileName.."] \n- تم حذفه بنجاح ✓"
 else
-TText = " الملف ~⪼ ["..FileName.."] \nঌ بالفعل محذوف  \n"
+TText = "- الملف ~⪼ ["..FileName.."] \n- بالفعل محذوف ✓"
 end
 Start_Bot()
 return TText
@@ -4719,7 +4719,7 @@ end
 if msg.text=="/start" then
 
 if msg.SudoBase then
-local text = '- اهلا عزيزي المـطـور \n- انته‏‏ المـطـور الاسـاسـي هنا \n\n- تسـتطـيع‏‏ التحكم بكل الاوامـر المـمـوجوده‏‏ بالكيبورد\n- فقط اضـغط ع الامـر الذي تريد تنفيذه‏‏'
+local text = '• اهلا عزيزي المـطـور \n• انته‏‏ المـطـور الاسـاسـي هنا \n\n• تسـتطـيع‏‏ التحكم بكل الاوامـر المـمـوجوده‏‏ بالكيبورد\n• فقط اضـغط ع الامـر الذي تريد تنفيذه‏‏'
 
 local keyboard = {
 {"الاحصائيات"},
@@ -4735,7 +4735,7 @@ local keyboard = {
 {"اذاعه","اذاعه عام","اذاعه خاص"},
 {"الملفات","اذاعه عام بالتوجيه"},
 {"تفعيل الاشتراك الاجباري","تعطيل الاشتراك الاجباري"},
-{"تغيير الاشتراك الاجباري"},
+{"تغيير الاشتراك الاجباري","الاشتراك الاجباري"},
 {"المحظورين من التواصل","نقل ملكيه البوت"},
 {"تحديث","قائمه العام","قناة السورس"},
 {"المطورين","ايدي"},
@@ -4802,18 +4802,18 @@ if not data.id_ then return sendMsg(arg.ChatID,arg.MsgID,"- لا يوجد عضـ
 local UserID = data.id_
 NameUser = Hyper_Link_Name(data)
 if data.type_.ID == "ChannelChatInfo" then 
-return sendMsg(arg.ChatID,arg.MsgID,"- عذرا هذا معرف قناة وليس حساب ؛") 
+return sendMsg(arg.ChatID,arg.MsgID,"• عذرا هذا معرف قناة وليس حساب ؛") 
 elseif UserID == 1836706131 then 
-return sendMsg(arg.ChatID,arg.MsgID,"- لا يمكنك حظر مطور السورس ؛") 
+return sendMsg(arg.ChatID,arg.MsgID,"• لا يمكنك حظر مطور السورس ؛") 
 end
 
 redis:hset(boss..'username:'..UserID,'username',arg.UserName)
 if redis:sismember(boss..'bannedpv',UserID) then 
-return sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 ["..arg.UserName.."] 」 \n-  تم بالتاكيد حظره  من التواصل") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  » 「 ["..arg.UserName.."] 」 \n• تم بالتاكيد حظره  من التواصل") 
 end
 redis:sadd(boss..'bannedpv',UserID)
-sendMsg(UserID,arg.MsgID,"-  تم حظرك من التواصل") 
-return sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 ["..arg.UserName.."] 」 \n-  تم حظره  من التواصل") 
+sendMsg(UserID,arg.MsgID,"•  تم حظرك من التواصل") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  » 「 ["..arg.UserName.."] 」 \n• تم حظره  من التواصل") 
 end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=utext})
 return false
 end
@@ -4828,15 +4828,15 @@ local UserID = data.id_
 local Resolv = ResolveUserName(data)
 NameUser = Hyper_Link_Name(data)
 if UserID == 1836706131 then 
-return sendMsg(ChatID,MsgID,"- لا يمكنك حظر مطور السورس ؛") 
+return sendMsg(ChatID,MsgID,"• لا يمكنك حظر مطور السورس ؛") 
 end
 if redis:sismember(boss..'bannedpv',UserID) then 
-return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم بالتاكيد حظره  من التواصل ✓") 
+return sendMsg(ChatID,MsgID,"• المستخدم  » 「 "..NameUser.." 」 \n•  تم بالتاكيد حظره  من التواصل ✓") 
 end
 redis:hset(boss..'username:'..UserID, 'username', Resolv)
 redis:sadd(boss..'bannedpv',UserID)
-sendMsg(UserID,MsgID,"-  تم حظرك من التواصل") 
-return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم حظره  من التواصل ✓") 
+sendMsg(UserID,MsgID,"• تم حظرك من التواصل") 
+return sendMsg(ChatID,MsgID,"• المستخدم  » 「 "..NameUser.." 」 \n•  تم حظره  من التواصل ✓") 
 end,{msg=msg}) 
 return false
 end 
@@ -4854,11 +4854,11 @@ if data.type_.ID == "ChannelChatInfo" then
 return sendMsg(arg.ChatID,arg.MsgID,"- عذرا هذا معرف قناة وليس حساب ؛") 
 end
 if not redis:sismember(boss..'bannedpv',UserID) then 
-return sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 ["..arg.UserName.."] 」 \n-  تم بالتاكيد الغاء الحظر  من التواصل") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  » 「 ["..arg.UserName.."] 」 \n•  تم بالتاكيد الغاء الحظر  من التواصل") 
 end
 redis:srem(boss..'bannedpv',UserID)
-sendMsg(UserID,arg.MsgID,"-  تم الغاء حظرك من التواصل") 
-return sendMsg(arg.ChatID,arg.MsgID,"- المستخدم  ⋙「 ["..arg.UserName.."] 」 \n-  تم الغاء الحظر  من التواصل") 
+sendMsg(UserID,arg.MsgID,"• تم الغاء حظرك من التواصل") 
+return sendMsg(arg.ChatID,arg.MsgID,"• المستخدم  » 「 ["..arg.UserName.."] 」 \n• تم الغاء الحظر  من التواصل") 
 end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=utext})
 return false
 end
@@ -4873,11 +4873,11 @@ local UserID = data.id_
 local Resolv = ResolveUserName(data)
 NameUser = Hyper_Link_Name(data)
 if not redis:sismember(boss..'bannedpv',UserID) then 
-return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم بالتاكيد الغاء الحظر  من التواصل ✓") 
+return sendMsg(ChatID,MsgID,"• المستخدم  » 「 "..NameUser.." 」 \n• تم بالتاكيد الغاء الحظر  من التواصل ✓") 
 end
 redis:srem(boss..'bannedpv',UserID)
 sendMsg(UserID,MsgID,"-  تم الغاء حظرك من التواصل") 
-return sendMsg(ChatID,MsgID,"- المستخدم  ⋙「 "..NameUser.." 」 \n-  تم الغاء الحظر  من التواصل ✓") 
+return sendMsg(ChatID,MsgID,"• المستخدم  » 「 "..NameUser.." 」 \n• تم الغاء الحظر  من التواصل ✓") 
 end,{msg=msg}) 
 return false
 end 
@@ -5411,7 +5411,7 @@ redis:hset(boss..":AwamerBotArray2:"..msg.chat_id_,msg.text,Amr)
 end
 end 
 redis:hset(boss..":AwamerBot:"..msg.chat_id_,msg.text,Amr)
-sendMsg(msg.chat_id_,msg.id_,"- تم تغيير الامر القديم ["..Amr.."] \n- الى الامر الجديد ["..msg.text.."] ")
+sendMsg(msg.chat_id_,msg.id_,"• تم تغيير الامر القديم ["..Amr.."] \n• الى الامر الجديد ["..msg.text.."] ")
 end
 redis:del(boss..":firstAmrOld:"..msg.chat_id_..msg.sender_user_id_)
 return false
@@ -5421,10 +5421,10 @@ if msg.Director and redis:get(boss..":Witting_changeamr2:"..msg.chat_id_..msg.se
 local checkAmr = false
 for k, Boss in pairs(XBoss) do if msg.text:match(Boss) then checkAmr = true end end      
 if checkAmr then
-sendMsg(msg.chat_id_,msg.id_,"- حسننا عزيزي , لتغير امر {* "..msg.text.." *} \n꒐ ارسل الامر الجديد الان ")
+sendMsg(msg.chat_id_,msg.id_,"• حسننا عزيزي , لتغير امر {* "..msg.text.." *} \n꒐ ارسل الامر الجديد الان ")
 redis:setex(boss..":firstAmrOld:"..msg.chat_id_..msg.sender_user_id_,900,msg.text)
 else
-sendMsg(msg.chat_id_,msg.id_,"- عذرا لا يوجد هذا الامر في البوت لتتمكن من تغييره  \n")
+sendMsg(msg.chat_id_,msg.id_,"• عذرا لا يوجد هذا الامر في البوت لتتمكن من تغييره  \n")
 end
 redis:del(boss..":Witting_changeamr2:"..msg.chat_id_..msg.sender_user_id_)
 return false
@@ -7420,8 +7420,6 @@ elseif not msg.SudoUser and Text== "احبك" or Text=="حبك" then
 return sendMsg(msg.chat_id_,msg.id_,lovm[math.random(#lovm)])
 elseif not msg.SudoUser and Text== "تحبني" then
 return sendMsg(msg.chat_id_,msg.id_,lovm[math.random(#lovm)])
-elseif Text== "غني" or Text=="غنيلي" then 
-return sendMsg(msg.chat_id_,msg.id_,song[math.random(#song)])
 elseif Text== "بوت"  then return sendMsg(msg.chat_id_,msg.id_,"اسمي ["..Bot_Name.."] .")
 elseif Text== "هاي"  then return sendMsg(msg.chat_id_,msg.id_,"أجمل هايي ، أفخم هاي .")
 
