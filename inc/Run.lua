@@ -69,15 +69,15 @@ print('\n\27[1;31m￤ {USERNAME_NOT_OCCUPIED} => Please Check it!\n￤ لآ يو
 create_config(Token)
 end 
 GetUser.result.username = GetUser.result.username or GetUser.result.first_name
-print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس علام الآن .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
+print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل السورس الآن.\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
 boss = Token:match("(%d+)")
 redis:mset(
 boss..":VERSION","1.0",
 boss..":SUDO_ID:",SUDO_USER,
 boss..":DataCenter:","Amsterdam",
 boss..":UserNameBot:",BOT_User,
-boss..":ApiSource","Sourceallam",
-boss..":NameBot:","علام",
+boss..":ApiSource","Sourcemilan",
+boss..":NameBot:","دروك",
 "TH3BOSS_INSTALL","Yes"
 )
 redis:hset(boss..'username:'..SUDO_USER,'username','@'..GetUser.result.username:gsub('_',[[\_]]))
