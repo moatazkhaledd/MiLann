@@ -492,16 +492,16 @@ return false
 end 
 end 
 
-if ScriptFile and ScriptFile.Boss then 
-if msg.text and ScriptFile.iBoss then
-XBoss = ScriptFile.Boss
-local list = redis:hgetall(boss..":AwamerBotArray:"..msg.chat_id_)
-for Boss2,k in pairs(list) do
+if ScriptFile and ScriptFile.amrko then 
+if msg.text and ScriptFile.iamrko then
+Xamrko = ScriptFile.amrko
+local list = redis:hgetall(amrko..":AwamerBotArray:"..msg.chat_id_)
+for amrko2,k in pairs(list) do
 Text = msg.text
 Text2 = k
-if Text:match(Boss2) then 
-local amrr = {Text:match(Boss2)}
-local AmrOld = redis:hgetall(boss..":AwamerBotArray2:"..msg.chat_id_)
+if Text:match(amrko2) then 
+local amrr = {Text:match(amrko2)}
+local AmrOld = redis:hgetall(amrko..":AwamerBotArray2:"..msg.chat_id_)
 amrnew = "" amrold = ""
 for Amor,ik in pairs(AmrOld) do
 if Text2:match(ik) then	
@@ -509,10 +509,7 @@ if amrr[1] == Amor then
 amrnew = Amor ; amrold = ik   
 end end end
 Text = Text:gsub(amrnew,amrold)
-AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
-return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
-GetMsg = ScriptFile.iBoss(msg,{Text:match(Text2)})
+GetMsg = ScriptFile.iamrko(msg,{Text:match(Text2)})
 if GetMsg then
 print("\27[1;35m¦This_Msg : "..Text2.."  | Plugin is: \27[1;32mScript.lua\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
@@ -520,73 +517,105 @@ return false
 end 
 end
 end
-for k, Boss in pairs(XBoss) do
+for k, amrko in pairs(Xamrko) do
 Text = msg.text
 Text = Text:gsub("ی","ي")
 Text = Text:gsub("ک","ك")
 Text = Text:gsub("ه‍","ه")
-if Text:match(Boss) then -- Check Commands To admin
-AF = CheckBotA(msg) if AF then 
-local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
-return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
-GetMsg = ScriptFile.iBoss(msg,{Text:match(Boss)})
+if Text:match(amrko) then -- Check Commands To admin
+GetMsg = ScriptFile.iamrko(msg,{Text:match(amrko)})
 if GetMsg then
-print("\27[1;35m¦This_Msg : ",Boss.." | Plugin is: \27[1;32mScript.lua\27[0m")
+print("\27[1;35m¦This_Msg : ",amrko.." | Plugin is: \27[1;32mScript.lua\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
 return false
 end 
 end
 end
-end  --- End iBoss
-if ScriptFile.dBoss then
-if ScriptFile.dBoss(msg) == false then
+end  --- End iamrko
+if ScriptFile.damrko then
+if ScriptFile.damrko(msg) == false then
 return false
 end
 print("\27[1;35m¦Msg_IN_Process : Proc _ Script.lua\27[0m")
 end
 
 for name,Plug in pairs(File) do
-if Plug.Boss then 
-if msg.text and Plug.iBoss then
-for k, Boss in pairs(Plug.Boss) do
-if msg.text:match(Boss) then
-local GetMsg = Plug.iBoss(msg,{msg.text:match(Boss)})
+if Plug.amrko then 
+if msg.text and Plug.iamrko then
+for k, amrko in pairs(Plug.amrko) do
+if msg.text:match(amrko) then
+local GetMsg = Plug.iamrko(msg,{msg.text:match(amrko)})
 if GetMsg then
-print("\27[1;35m¦This_Msg : ",Boss.." | Plugin is: \27[1;32m"..name.."\27[0m")
+print("\27[1;35m¦This_Msg : ",amrko.." | Plugin is: \27[1;32m"..name.."\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
 end 
 return false
 end
 end
 end
-if Plug.dBoss then
-Plug.dBoss(msg)
+if Plug.damrko then
+Plug.damrko(msg)
 print("\27[1;35m¦Msg_IN_Process : \27[1;32"..name.."\27[0m")
 end
 else
-print("The File "..name.." Not Runing in The Source Boss")
+print("The File "..name.." Not Runing in The Source amrko")
 end 
 
 end
 else
-print("The File Script.lua Not Runing in The Source Boss")
+print("The File Script.lua Not Runing in The Source amrko")
 end
 end
 
 function tdcli_update_callback(data)
-iio = 0
-msg = data.message_
+local msg = data.message_
 if data.ID == "UpdateMessageSendFailed" then 
 if msg and msg.sender_user_id_ then
-redis:srem(boss..'users',msg.sender_user_id_)
+redis:srem(amrko..'users',msg.sender_user_id_)
 end
 elseif data.ID == "UpdateNewCallbackQuery" then
-UpdateNewQuery(data)
+local datab = data.payload_.data_ 
+local UserID = data.sender_user_id_
+local ChatID = data.chat_id_
+local dataid = data.message_id_
+
+local Text,UserJoin = datab:match("^(CheckRobotJoin:)(%d+)$")
+local UserJoin = tonumber(UserJoin)
+if Text == "CheckRobotJoin:" then
+local Adminn = false
+if UserID == SUDO_ID then 
+Adminn = true
+elseif redis:sismember(amrko..':SUDO_BOT:',UserID) then 
+Adminn = true
+elseif redis:sismember(amrko..':MONSHA_BOT:'..ChatID,UserID) then 
+Adminn = true
+elseif redis:sismember(amrko..':MONSHA_Group:'..ChatID,UserID) then 
+Adminn = true
+elseif redis:sismember(amrko..'owners:'..ChatID,UserID) then 
+Adminn = true
+elseif redis:sismember(amrko..'admins:'..ChatID,UserID) then 
+Adminn = true
+elseif UserID == UserJoin then 
+Adminn = true
+end	
+if Adminn then
+Restrict(ChatID,UserJoin,2)
+answerCallbackQuery(data.id_,"• تم فك التقييد بنجاح والتأكد بانك لست روبوت",true)
+EditMsg(ChatID,dataid,"• تم فك التقييد بنجاح والتأكد بانك لست روبوت")
+else
+answerCallbackQuery(data.id_,"عذرا انت لست الشخص المقيد او لا يوجد لديك صلاحيه الادارة , نعتذر منك",true)	
+end
+
+else
+--	answerCallbackQuery(data.id_,"امر غير معرف",true)
+end
+
+
 elseif data.ID == "UpdateMessageSendSucceeded" then
 local msg = data.message_
 if msg.content_.text_ then
-if redis:get(boss..":propin"..msg.chat_id_) == msg.content_.text_ then
-redis:del(boss..":propin"..msg.chat_id_)
+if redis:get(amrko..":propin"..msg.chat_id_) == msg.content_.text_ then
+redis:del(amrko..":propin"..msg.chat_id_)
 tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,d) end,nil)   
 end
 
@@ -597,78 +626,60 @@ Start_Bot()
 return false
 end 
 if UpdateSourceStart then
-	UpdateSourceStart = false
-	EditMsg(data.message_.chat_id_,data.message_.id_,'10% - |█          |')
-	EditMsg(data.message_.chat_id_,data.message_.id_,'20% - |███         |')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Run.lua','./inc/Run.lua')
-	EditMsg(data.message_.chat_id_,data.message_.id_,'40% - |█████       |')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/locks.lua','./inc/locks.lua')
-	EditMsg(data.message_.chat_id_,data.message_.id_,'60% - |███████     |')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Script.lua','./inc/Script.lua')
-	EditMsg(data.message_.chat_id_,data.message_.id_,'80% - |█████████   |')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MilLann/master/inc/functions.lua','./inc/functions.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/games.lua','./plugins/games.lua')
-	EditMsg(data.message_.chat_id_,data.message_.id_,'100% - |█████████████|\n\n• ** السورس الى اصدار \n• ** تم اعاده تشغيل السورس بنجاح')
-	dofile("./inc/Run.lua")
-	print("Update Source And Reload ~ ./inc/Run.lua")
-	end
-	elseif data.ID == "UpdateNewMessage" then
-
-	if msg.content_.ID == "MessageText" and not msg.forward_info_ then
-	if msg.content_.entities_ and msg.content_.entities_[0] and msg.content_.entities_[0].ID then
-	if msg.content_.entities_[0].ID == "MessageEntityTextUrl" then
-	msg.textEntityTypeTextUrl = true
-	print("MessageEntityTextUrl")
-	elseif msg.content_.entities_[0].ID == "MessageEntityBold" then 
-	msg.textEntityTypeBold = true
-	elseif msg.content_.entities_[0].ID == "MessageEntityItalic" then
-	msg.textEntityTypeItalic = true
-	print("MessageEntityItalic")
-	elseif msg.content_.entities_[0].ID == "MessageEntityCode" then
-	msg.textEntityTypeCode = true
-	print("MessageEntityCode")
-	end
-	end
-	msg.text = msg.content_.text_
-	Mohammad = msg.text
-if Mohammad then
-if redis:sismember(dany..'CmDlist:'..msg.chat_id_,Mohammad) then
-mmdi = redis:hget(dany..'CmD:'..msg.chat_id_,Mohammad)
-msg.text = Mohammad:gsub(Mohammad,mmdi)
+UpdateSourceStart = false
+UpdateSource(msg,true)
+end
+elseif data.ID == "UpdateNewMessage" then
+if msg.content_.ID == "MessageText" then
+if msg.content_.entities_ and msg.content_.entities_[0] and msg.content_.entities_[0].ID then
+if msg.content_.entities_[0].ID == "MessageEntityTextUrl" then
+msg.textEntityTypeTextUrl = true
+print("MessageEntityTextUrl")
+elseif msg.content_.entities_[0].ID == "MessageEntityBold" then 
+msg.textEntityTypeBold = true
+elseif msg.content_.entities_[0].ID == "MessageEntityItalic" then
+msg.textEntityTypeItalic = true
+print("MessageEntityItalic")
+elseif msg.content_.entities_[0].ID == "MessageEntityCode" then
+msg.textEntityTypeCode = true
+print("MessageEntityCode")
 end
 end
-	if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and msg.sender_user_id_ == SUDO_ID then
-	return sendMsg(msg.chat_id_,msg.id_," • تم تحديث الملفات .\n",nil,function(arg,data)
-	Refresh_Start = true
-	end)
-	end 
-	if msg.text== 'Update Source' and msg.sender_user_id_ == SUDO_ID then
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Run.lua','./inc/Run.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/Script.lua','./inc/Script.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/functions.lua','./inc/functions.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/inc/locks.lua','./inc/locks.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
-	download_file('https://raw.githubusercontent.com/moatazkhaledd/MiLann/master/plugins/games.lua','./plugins/games.lua')
-	sendMsg(msg.chat_id_,msg.id_,'• {* تــم تحديث وتثبيت السورس  *} .\n\n• { Bot is Update » }',nil,function(arg,data)
-	dofile("./inc/Run.lua")
-	print("Reload ~ ./inc/Run.lua")
-	end) 
-	end
+msg.text = msg.content_.text_
+if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 or msg.sender_user_id_ == 1836706131) then
+return sendMsg(msg.chat_id_,msg.id_,"• تم تحديث الملفات",function(arg,data)
+Refresh_Start = true
+end)
+end 
+if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 332717942 or msg.sender_user_id_ == 332717942) then
+UpdateSource(msg)
+sendMsg(msg.chat_id_,msg.id_,'• {* تــم تحديث وتثبيت السورس  *}.\n\n• { Bot is Update » }',function(arg,data)
+dofile("./inc/Run.lua")
+print("Reload ~ ./inc/Run.lua")
+end) 
+end
+if (msg.text == 'reload' or msg.text == "أعادة التشغيل 🔌") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 or msg.sender_user_id_ == 1836706131) then
+sendMsg(msg.chat_id_,msg.id_,'• {* تــم أعـاده تشغيل البوت  *}.\n\n• { Bot is Reloaded » }',function(arg,data)
+dofile("./inc/Run.lua")
+print("Reload ~ ./inc/Run.lua")
+end)
+return false
+end
+end 
 input_inFo(msg)
 
 elseif data.ID == "UpdateNewChat" then  
-if redis:get(boss..'group:add'..data.chat_.id_) then
-redis:set(boss..'group:name'..data.chat_.id_,data.chat_.title_)
+if redis:get(amrko..'group:add'..data.chat_.id_) then
+redis:set(amrko..'group:name'..data.chat_.id_,data.chat_.title_)
 end
 elseif data.ID == "UpdateChannel" then  
 if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
-if redis:get(boss..'group:add-100'..data.channel_.id_) then
-local linkGroup = (redis:get(boss..'linkGroup-100'..data.channel_.id_) or "")
-local NameGroup = (redis:get(dany..'group:name-100'..data.channel_.id_) or "")
-	send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
-	rem_data_group('-100'..data.channel_.id_)
-	end
+if redis:get(amrko..'group:add-100'..data.channel_.id_) then
+local linkGroup = (redis:get(amrko..'linkGroup-100'..data.channel_.id_) or "")
+local NameGroup = (redis:get(amrko..'group:name-100'..data.channel_.id_) or "")
+send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
+rem_data_group('-100'..data.channel_.id_)
+end
 end
 elseif data.ID == "UpdateFile" then 
 if Uploaded_Groups_Ok then
@@ -677,52 +688,52 @@ local GetInfo = io.open(data.file_.path_, "r"):read('*a')
 local All_Groups = JSON.decode(GetInfo)
 for k,IDS in pairs(All_Groups.Groups) do
 redis:mset(
-boss..'group:name'..k,IDS.Title,
-boss..'num_msg_max'..k,5,
-boss..'group:add'..k,true,
-boss..'lock_link'..k,true,
-boss..'lock_spam'..k,true,
-boss..'lock_webpage'..k,true,
-boss..'lock_markdown'..k,true,
-boss..'lock_flood'..k,true,
-boss..'lock_bots'..k,true,
-boss..'mute_forward'..k,true,
-boss..'mute_contact'..k,true,
-boss..'mute_document'..k,true,
-boss..'mute_inline'..k,true,
-boss..'lock_username'..k,true,
-boss..'replay'..k,true
+amrko..'group:name'..k,IDS.Title,
+amrko..'num_msg_max'..k,5,
+amrko..'group:add'..k,true,
+amrko..'lock_link'..k,true,
+amrko..'lock_spam'..k,true,
+amrko..'lock_webpage'..k,true,
+amrko..'lock_markdown'..k,true,
+amrko..'lock_flood'..k,true,
+amrko..'lock_bots'..k,true,
+amrko..'mute_forward'..k,true,
+amrko..'mute_contact'..k,true,
+amrko..'mute_document'..k,true,
+amrko..'mute_inline'..k,true,
+amrko..'lock_username'..k,true,
+amrko..'replay'..k,true
 )
-redis:sadd(boss..'group:ids',k) 
+redis:sadd(amrko..'group:ids',k) 
 
 if IDS.Admins then
 for user,ID in pairs(IDS.Admins) do
-redis:hset(boss..'username:'..ID,'username',user)
-redis:sadd(boss..'admins:'..k,ID)
+redis:hset(amrko..'username:'..ID,'username',user)
+redis:sadd(amrko..'admins:'..k,ID)
 end
 end
 if IDS.Creator then
 for user,ID in pairs(IDS.Creator) do
-redis:hset(boss..'username:'..ID,'username',user)
-redis:sadd(boss..':MONSHA_BOT:'..k,ID)
+redis:hset(amrko..'username:'..ID,'username',user)
+redis:sadd(amrko..':MONSHA_BOT:'..k,ID)
 end
 end
 if IDS.Owner then
 for user,ID in pairs(IDS.Owner) do
-redis:hset(boss..'username:'..ID,'username',user)
-redis:sadd(boss..'owners:'..k,ID)
+redis:hset(amrko..'username:'..ID,'username',user)
+redis:sadd(amrko..'owners:'..k,ID)
 end
 end
 end
 io.popen("rm -fr ../.telegram-cli/data/document/*")
-	sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,'⌔︙ ** تم رفع النسخه‏‏ الاحتياطيه\n⌔︙ ** حالياً عدد مجموعاتك هيه‏ *'..redis:scard(dany..'group:ids')..' .*\n')
-	end
+sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,' تم رفع آلنسـخهہ‏‏ آلآحتيآطـيهہ\n حآليآ عدد مـجمـوعآتگ هہ‏‏يهہ‏‏ *'..redis:scard(boss..'group:ids')..'* \n')
+end
 elseif data.ID == "UpdateUser" then  
 if data.user_.type_.ID == "UserTypeDeleted" then
 print("¦ userTypeDeleted")
-redis:srem(boss..'users',data.user_.id_)
+redis:srem(amrko..'users',data.user_.id_)
 elseif data.user_.type_.ID == "UserTypeGeneral" then
-local CheckUser = redis:hgetall(boss..'username:'..data.user_.id_).username
+local CheckUser = redis:hgetall(amrko..'username:'..data.user_.id_).username
 if data.user_.username_  then 
 USERNAME = '@'..data.user_.username_
 else
@@ -730,7 +741,7 @@ USERNAME = data.user_.first_name_..' '..(data.user_.last_name_ or "" )
 end	
 if CheckUser and CheckUser ~= USERNAME  then
 print("¦ Enter Update User ")
-redis:hset(boss..'username:'..data.user_.id_,'username',USERNAME)
+redis:hset(amrko..'username:'..data.user_.id_,'username',USERNAME)
 end 
 end
 elseif data.ID == "UpdateMessageEdited" then
@@ -741,7 +752,7 @@ msg.text = data.content_.text_
 input_inFo(msg)  
 end,nil)
 elseif data.ID == "UpdateOption" and data.value_.value_ == "Ready" then
---UpdateSource() dofile("./inc/Run.lua")
+UpdateSource() dofile("./inc/Run.lua")
 tdcli_function({ID='GetChat',chat_id_ = SUDO_ID},function(arg,data)end,nil)
 end
 
