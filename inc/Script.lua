@@ -5558,30 +5558,29 @@ return false
 end
 
 
-if msg.SudoBase and redis:get(boss..":Witting_MoveBot:"..msg.chat_id_..msg.sender_user_id_) then
+if msg.SudoBase and redis:get(amrko..":Witting_MoveBot:"..msg.chat_id_..msg.sender_user_id_) then
 if msg.text:match("^@[%a%d_]+$") then
 GetUserName(msg.text,function(arg,data)
-if not data.id_ then return sendMsg(arg.ChatID,arg.MsgID,"- لا يوجد عضـو بهذا المعرف") end 
-if data.type_.user_ and data.type_.user_.type_.ID == "UserTypeBot" then return sendMsg(arg.ChatID,arg.MsgID,"- لا يمكنني رفع حساب بوت") end 
+if not data.id_ then return sendMsg(arg.ChatID,arg.MsgID,"• لآ يوجد عضـو بهہ‌‏ذآ آلمـعرف \n❕") end 
+if data.type_.user_ and data.type_.user_.type_.ID == "UserTypeBot" then return sendMsg(arg.ChatID,arg.MsgID,"📛*¦* لا يمكنني رفع حساب بوت \n❕") end 
 local UserID = data.id_
 if UserID == our_id then 
-return sendMsg(arg.ChatID,arg.MsgID,"- عذرا لا يمكنني رفع البوت") 
+return sendMsg(arg.ChatID,arg.MsgID,"• عذرا لا يمكنني رفع البوت") 
 elseif data.type_.ID == "ChannelChatInfo" then 
-return sendMsg(arg.ChatID,arg.MsgID,"- عذرا هذا معرف قناة وليس حساب ؛") 
+return sendMsg(arg.ChatID,arg.MsgID,"• عذرا هذا معرف قناة وليس حساب") 
 end
-if CheckUserinstall(arg.USERNAME) then return sendMsg(arg.ChatID,arg.MsgID,"- عذرا هذا الحساب محظور من سيرفرات حماية الزعيم ") end
-redis:set(boss..":SUDO_ID:",UserID)
+redis:set(amrko..":SUDO_ID:",UserID)
 local usero = arg.USERNAME:gsub([[\_]],"_")
-redis:hset(boss..'username:'..UserID,'username',usero)
-sendMsg(msg.chat_id_,msg.id_,"- تمت العملية بنجاح وتم تحويل ملكية البوت \n- الى الحساب الاتي : ["..arg.USERNAME:gsub([[\_]],"_").."]")
+redis:hset(amrko..'username:'..UserID,'username',usero)
+sendMsg(msg.chat_id_,msg.id_,"• تمت العملية بنجاح وتم تحويل ملكية البوت \n📮¦ الى الحساب الاتي : ["..arg.USERNAME:gsub([[\_]],"_").."]")
 dofile("./inc/Run.lua")
 print("Update Source And Reload ~ ./inc/Run.lua And change username sudo")
 end,{ChatID=msg.chat_id_,MsgID=msg.id_,USERNAME=msg.text})
 
 else
-sendMsg(msg.chat_id_,msg.id_,"- عذرا , هناك خطا لديك \n- هذا ليس معرف مستخدم ولا يحتوي على @  .")
+sendMsg(msg.chat_id_,msg.id_,"• عذرا , هناك خطأ لديك \n• هذا ليس معرف مستخدم ولا يحتوي على @  .")
 end
-redis:del(boss..":Witting_MoveBot:"..msg.chat_id_..msg.sender_user_id_)
+redis:del(amrko..":Witting_MoveBot:"..msg.chat_id_..msg.sender_user_id_)
 return false 
 end
 
