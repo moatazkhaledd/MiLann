@@ -720,8 +720,8 @@ end
 end
 if IDS.Owner then
 for user,ID in pairs(IDS.Owner) do
-redis:hset(amrko..'username:'..ID,'username',user)
-redis:sadd(amrko..'owners:'..k,ID)
+redis:hset(boss..'username:'..ID,'username',user)
+redis:sadd(boss..'owners:'..k,ID)
 end
 end
 end
@@ -733,7 +733,7 @@ if data.user_.type_.ID == "UserTypeDeleted" then
 print("¦ userTypeDeleted")
 redis:srem(amrko..'users',data.user_.id_)
 elseif data.user_.type_.ID == "UserTypeGeneral" then
-local CheckUser = redis:hgetall(amrko..'username:'..data.user_.id_).username
+local CheckUser = redis:hgetall(boss..'username:'..data.user_.id_).username
 if data.user_.username_  then 
 USERNAME = '@'..data.user_.username_
 else
