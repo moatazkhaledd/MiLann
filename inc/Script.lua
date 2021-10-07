@@ -9086,14 +9086,6 @@ end
 
 
 end
-
-return {
-boss = {
-"^(زخرفه)$"
- },
- iboss = Zhrfa,
- dboss = TextRes,
- }
  
  
 
