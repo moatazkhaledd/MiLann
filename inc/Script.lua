@@ -3816,7 +3816,7 @@ end
 return false
 end 
 
-if MsgText[1] == "رتبتي" then return '• رتبتك » '..msg.TheRank..'' ✘ end
+if MsgText[1] == "رتبتي" then return '• رتبتك » '..msg.TheRank..'' end
 
 ----------------- استقبال الرسائل ---------------
 if MsgText[1] == "الغاء الامر" or MsgText[1] == "الغاء" then
